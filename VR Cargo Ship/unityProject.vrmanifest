@@ -5,10 +5,10 @@
       "app_key": "application.generated.unity.vrcargoships.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "D:\\VR Jam 2019\\VR Cargo Ships\\actions.json",
+      "action_manifest_path": "D:\\VR Jam 2019\\VR Cargo Ships\\VR Cargo Ship\\actions.json",
       "strings": {
         "en_us": {
-          "name": "VR Cargo Ships [Testing]"
+          "name": "VR Cargo Ship [Testing]"
         }
       }
     }
