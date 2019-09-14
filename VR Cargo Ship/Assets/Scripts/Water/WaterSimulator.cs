@@ -101,13 +101,13 @@ public class WaterSimulator : MonoBehaviour
 				vertices[startVertex + 4] = new Vector3(x * squareSize + area.x, heights[x + (y + 1) * (size.x + 1)], (y + 1) * squareSize + area.y);
 				vertices[startVertex + 5] = new Vector3((x + 1) * squareSize + area.x, heights[(x + 1) + (y + 1) * (size.x + 1)], (y + 1) * squareSize + area.y);
 
-				uvs[startVertex + 0] = new Vector2(x * invSize.x, y * invSize.y);
-				uvs[startVertex + 1] = new Vector2(x * invSize.x, (y + 1) * invSize.y);
-				uvs[startVertex + 2] = new Vector2((x + 1) * invSize.x, y * invSize.y);
+				uvs[startVertex + 0] = new Vector2(x * invSize.x, 1.0f - y * invSize.y);
+				uvs[startVertex + 1] = new Vector2(x * invSize.x, 1.0f - (y + 1) * invSize.y);
+				uvs[startVertex + 2] = new Vector2((x + 1) * invSize.x, 1.0f - y * invSize.y);
 
-				uvs[startVertex + 3] = new Vector2((x + 1) * invSize.x, y * invSize.y);
-				uvs[startVertex + 4] = new Vector2(x * invSize.x, (y + 1) * invSize.y);
-				uvs[startVertex + 5] = new Vector2((x + 1) * invSize.x, (y + 1) * invSize.y);
+				uvs[startVertex + 3] = new Vector2((x + 1) * invSize.x, 1.0f - y * invSize.y);
+				uvs[startVertex + 4] = new Vector2(x * invSize.x, 1.0f - (y + 1) * invSize.y);
+				uvs[startVertex + 5] = new Vector2((x + 1) * invSize.x, 1.0f - (y + 1) * invSize.y);
 			}
 		}
 	}
