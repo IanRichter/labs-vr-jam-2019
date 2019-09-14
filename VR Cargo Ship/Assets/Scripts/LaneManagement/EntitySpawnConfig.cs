@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class EntitySpawnConfig : MonoBehaviour {
+[CreateAssetMenu(fileName = "Create Entity Config")]
+public class EntitySpawnConfig : ScriptableObject {
 
 	[Header("Entity")]
 	public GameObject entityPrefab;
