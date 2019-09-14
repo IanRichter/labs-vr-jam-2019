@@ -21,6 +21,14 @@ public class InputManager : MonoBehaviour {
 
 	public bool IsBoosting {
 		get {
+			if (ViveInput.GetPress(HandRole.LeftHand, ControllerButton.Grip)) {
+				return true;
+			}
+
+			if (ViveInput.GetPress(HandRole.RightHand, ControllerButton.Grip)) {
+				return true;
+			}
+
 			return Input.GetKey(KeyCode.L);
 		}
 	}
