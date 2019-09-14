@@ -376,6 +376,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &506258559 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7822937474922960338, guid: 31f6626d4c1dda04e8cc1430d3faf8a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7822937475024892333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &506258561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506258559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d2e282e0f825a045aa655f6d45ed7bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numLanes: 10
+  spawnZoneSize: 0
+  finishZoneSize: 0
 --- !u!1001 &605504187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -891,7 +912,7 @@ PrefabInstance:
     - target: {fileID: 8166548086194135465, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
         type: 3}
       propertyPath: m_Name
-      value: LaneManager
+      value: SpawnHeuristic
       objectReference: {fileID: 0}
     - target: {fileID: 8166548086194135466, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
         type: 3}
@@ -948,5 +969,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8166548086194135464, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
+        type: 3}
+      propertyPath: laneManager
+      value: 
+      objectReference: {fileID: 506258561}
+    m_RemovedComponents:
+    - {fileID: 8166548086194135467, guid: 1ac5f9dc60240d24c8ba629a1a6d4672, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1ac5f9dc60240d24c8ba629a1a6d4672, type: 3}
