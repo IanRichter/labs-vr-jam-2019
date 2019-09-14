@@ -16,6 +16,9 @@ public class PlayerShip : MonoBehaviour {
 	[HideInInspector]
 	public InputManager inputManager;
 
+	public delegate void PlayerDeathEvent();
+	public PlayerDeathEvent OnPlayerDeath;
+
 	// Cargo
 	private int crates = 0;
 	public int Crates {
@@ -62,6 +65,7 @@ public class PlayerShip : MonoBehaviour {
 		crates = Mathf.Max(crates - amount, 0);
 
 		if (crates == 0) {
+			OnPlayerDeath?.Invoke();
 			Destroy(gameObject);
 		}
 	}
