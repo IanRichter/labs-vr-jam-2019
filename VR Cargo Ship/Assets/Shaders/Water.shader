@@ -2,12 +2,12 @@
 {
     Properties
     {
-		_BaseColor ("Base Color", Color) = (0.2, 0.5, 1.0, 0.7)
 		_LaneColorA ("Lane A Color", Color) = (0.2, 0.5, 1.0, 0.7)
 		_LaneColorB ("Lane B Color", Color) = (0.2, 0.5, 1.0, 0.7)
 		_LaneCount ("Lane Count", Int) = 10
 		_StartPerc ("Start Percentage", Float) = 0.1
 		_EndPerc ("End Percentage", Float) = 0.9
+		_Shininess ("Shininess", Float) = 0.5
         _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
@@ -37,24 +37,26 @@
             struct VertToFrag
             {
                 float2 uv : TEXCOORD0;
-				float3 worldNormal : TEXCOORD1;
+				float3 worldPosition : TEXCOORD1;
+				float3 worldNormal : TEXCOORD2;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-			float4 _BaseColor;
 			float4 _LaneColorA;
 			float4 _LaneColorB;
 			float _StartPerc;
 			float _EndPerc;
 			int _LaneCount;
+			float _Shininess;
 
             VertToFrag vert (VertexInput v)
             {
                 VertToFrag o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+				o.worldPosition = mul(unity_ObjectToWorld, v.vertex);
 				o.worldNormal = UnityObjectToWorldNormal(v.normal);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o, o.vertex);
@@ -63,6 +65,9 @@
 
             float4 frag (VertToFrag i) : SV_Target
             {
+				float3 worldNormal = normalize(i.worldNormal);
+				float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
+
                 float4 color = _LaneColorA;
 
 				float startPerc = 0.1;
@@ -80,10 +85,15 @@
 					}
 				}
 
-				float diffuseFactor = max(0, dot(i.worldNormal, _WorldSpaceLightPos0.xyz));
+				float diffuseFactor = max(0, dot(worldNormal, lightDir));
 				float3 diffuse = _LightColor0 * diffuseFactor;
 
-				color.xyz *= diffuse;
+				float3 lightReflectionDir = normalize(2 * dot(lightDir, worldNormal) * worldNormal - lightDir);
+				float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPosition.xyz);
+				float specularFactor = pow(max(0.0, dot(lightReflectionDir, viewDir)), _Shininess) * 0.2;
+
+				color.xyz = float3(1.0, 1.0, 1.0) * specularFactor + color.xyz * diffuse;
+				color.w = (1.0 - color.w) * specularFactor + color.w;
 
                 UNITY_APPLY_FOG(i.fogCoord, color);
                 return color;
