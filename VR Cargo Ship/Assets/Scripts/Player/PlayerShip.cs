@@ -5,12 +5,14 @@ public class PlayerShip : MonoBehaviour {
 	[Header("Forward Movement")]
 	public float baseMoveSpeed = 0f;
 	public float baseBoostMoveSpeed = 0f;
-	public float baseMoveSpeedAccel = 0.1f;
+	public float baseMoveSpeedAccel = 0.075f;
 	private float moveSpeedModifier = 1f;
 	private float moveSpeed = 0;
 
 	[Header("Steering Movement")]
 	public float baseSteerSpeed = 0f;
+	public float baseSteerSpeedAccel = 0.05f;
+	public float steerSpeed = 0f;
 	private float steerSpeedModifier = 1f;
 
 	[HideInInspector]
@@ -49,16 +51,20 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	private void Steer() {
+		float targetSteerSpeed = 0f;
+
 		if (inputManager.IsLeft) {
-			Vector3 pos = transform.position;
-			pos.x -= baseSteerSpeed * Time.deltaTime;
-			transform.position = pos;
+			targetSteerSpeed = -baseSteerSpeed;
 		}
 		if (inputManager.IsRight) {
-			Vector3 pos = transform.position;
-			pos.x += baseSteerSpeed * Time.deltaTime;
-			transform.position = pos;
+			targetSteerSpeed = baseSteerSpeed;
 		}
+
+		steerSpeed = Mathf.MoveTowards(steerSpeed, targetSteerSpeed, baseSteerSpeedAccel);
+
+		Vector3 pos = transform.position;
+		pos.x += steerSpeed * Time.deltaTime;
+		transform.position = pos;
 	}
 
 	public void Damage(int amount) {
