@@ -2,8 +2,9 @@
 
 public class SpawnLane : MonoBehaviour {
 
-	public Transform leftBorder;
-	public Transform rightBorder;
+	private float laneOffset;
+	private Vector3 leftPos;
+	private Vector3 rightPos;
 
 	private Obstacle entity;
 	
@@ -20,7 +21,12 @@ public class SpawnLane : MonoBehaviour {
 		}
 	}
 
-	
+	public void ConfigSpawnPoints(float offset)
+	{
+		laneOffset = offset;
+		leftPos = new Vector3(-laneOffset, 0.0f, 0.0f);
+		rightPos = new Vector3(laneOffset, 0.0f, 0.0f);
+	}
 	
 	public void SpawnEntity(EntitySpawnConfig entityConfig, EntityMoveDirection direction) {
 		if (entity) {
@@ -29,8 +35,8 @@ public class SpawnLane : MonoBehaviour {
 		
 		this.entityConfig = entityConfig;
 
-		Vector3 spawnPos = direction == EntityMoveDirection.Left ? leftBorder.position : rightBorder.position;
-		Vector3 endPos = direction == EntityMoveDirection.Left ? rightBorder.position : leftBorder.position;
+		Vector3 spawnPos = (direction == EntityMoveDirection.Left) ? leftPos : rightPos;
+		Vector3 endPos = (direction == EntityMoveDirection.Left) ? rightPos : leftPos;
 
 		GameObject newObject = Instantiate(entityConfig.entityPrefab, spawnPos, Quaternion.identity);
 
@@ -51,8 +57,8 @@ public class SpawnLane : MonoBehaviour {
 
 	private void OnDrawGizmos() {
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(leftBorder.position, 0.1f);
-		Gizmos.DrawWireSphere(rightBorder.position, 0.1f);
+		Gizmos.DrawWireSphere(leftPos, 0.1f);
+		Gizmos.DrawWireSphere(rightPos, 0.1f);
 	}
 
 }
