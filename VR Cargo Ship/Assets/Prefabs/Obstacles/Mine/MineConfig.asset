@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42931c96213a27c429906b04d3c91d49, type: 3}
   m_Name: MineConfig
   m_EditorClassIdentifier: 
-  entityPrefab: {fileID: 0}
-  difficulty: 0
+  entityPrefab: {fileID: 3052086594856496823, guid: fdb57771413cd2d48bb24d0786b13c86,
+    type: 3}
+  difficulty: 0.2
