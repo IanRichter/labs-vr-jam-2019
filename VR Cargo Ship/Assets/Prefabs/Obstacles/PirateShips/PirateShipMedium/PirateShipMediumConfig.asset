@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PirateShipMediumConfig
   m_EditorClassIdentifier: 
   entityPrefab: {fileID: 0}
-  difficulty: 0
+  difficulty: 0.7

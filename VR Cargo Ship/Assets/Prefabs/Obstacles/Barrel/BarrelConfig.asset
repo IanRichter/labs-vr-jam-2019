@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42931c96213a27c429906b04d3c91d49, type: 3}
   m_Name: BarrelConfig
   m_EditorClassIdentifier: 
-  entityPrefab: {fileID: 0}
+  entityPrefab: {fileID: 8417912250303876491, guid: 765b90730a797064392a302429e81d0f,
+    type: 3}
   difficulty: 0
