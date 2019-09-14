@@ -48,22 +48,12 @@ public class WaterSimulator : MonoBehaviour
 		size.x = (int)(area.width / squareSize);
 		size.y = (int)(area.height / squareSize);
 		
-		vertices = new Vector3[size.x * size.y * 4];
-		uvs = new Vector2[size.x * size.y * 4];
+		vertices = new Vector3[size.x * size.y * 6];
+		uvs = new Vector2[size.x * size.y * 6];
 		indices = new int[size.x * size.y * 6];
 		heights = new float[(size.x + 1) * (size.y + 1)];
 
-		for (int i = 0; i < size.x * size.y; i++)
-		{
-			int startIndex = i * 6;
-			int startVertex = i * 4;
-			indices[startIndex + 0] = startVertex + 0;
-			indices[startIndex + 1] = startVertex + 1;
-			indices[startIndex + 2] = startVertex + 2;
-			indices[startIndex + 3] = startVertex + 1;
-			indices[startIndex + 4] = startVertex + 3;
-			indices[startIndex + 5] = startVertex + 2;
-		}
+		for (int i = 0; i < size.x * size.y * 6; i++) indices[i] = i;
 
 		UpdateVertices();
 
@@ -102,16 +92,22 @@ public class WaterSimulator : MonoBehaviour
 		{
 			for (int x = 0; x < size.x; x++)
 			{
-				int startVertex = (x + y * size.x) * 4;
+				int startVertex = (x + y * size.x) * 6;
 				vertices[startVertex + 0] = new Vector3(x * squareSize + area.x, heights[x + y * (size.x + 1)], y * squareSize + area.y);
 				vertices[startVertex + 1] = new Vector3(x * squareSize + area.x, heights[x + (y + 1) * (size.x + 1)], (y + 1) * squareSize + area.y);
 				vertices[startVertex + 2] = new Vector3((x + 1) * squareSize + area.x, heights[(x + 1) + y * (size.x + 1)], y * squareSize + area.y);
-				vertices[startVertex + 3] = new Vector3((x + 1) * squareSize + area.x, heights[(x + 1) + (y + 1) * (size.x + 1)], (y + 1) * squareSize + area.y);
+
+				vertices[startVertex + 3] = new Vector3((x + 1) * squareSize + area.x, heights[(x + 1) + y * (size.x + 1)], y * squareSize + area.y);
+				vertices[startVertex + 4] = new Vector3(x * squareSize + area.x, heights[x + (y + 1) * (size.x + 1)], (y + 1) * squareSize + area.y);
+				vertices[startVertex + 5] = new Vector3((x + 1) * squareSize + area.x, heights[(x + 1) + (y + 1) * (size.x + 1)], (y + 1) * squareSize + area.y);
 
 				uvs[startVertex + 0] = new Vector2(x * invSize.x, y * invSize.y);
 				uvs[startVertex + 1] = new Vector2(x * invSize.x, (y + 1) * invSize.y);
 				uvs[startVertex + 2] = new Vector2((x + 1) * invSize.x, y * invSize.y);
-				uvs[startVertex + 3] = new Vector2((x + 1) * invSize.x, (y + 1) * invSize.y);
+
+				uvs[startVertex + 3] = new Vector2((x + 1) * invSize.x, y * invSize.y);
+				uvs[startVertex + 4] = new Vector2(x * invSize.x, (y + 1) * invSize.y);
+				uvs[startVertex + 5] = new Vector2((x + 1) * invSize.x, (y + 1) * invSize.y);
 			}
 		}
 	}
