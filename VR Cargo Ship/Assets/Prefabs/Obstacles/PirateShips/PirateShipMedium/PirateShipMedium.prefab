@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2325080964953909786}
   - component: {fileID: 6966690009806129681}
   - component: {fileID: 335056462460878314}
+  - component: {fileID: 2814770363676049767}
   - component: {fileID: 6758825640794552059}
   m_Layer: 0
   m_Name: PirateShipMedium
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2830582506722534618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8411779899742350651}
@@ -61,8 +62,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9829fba13439e443a82f0f39255de54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.75
+  moveSpeed: 0.175
   direction: 0
+--- !u!114 &2814770363676049767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830582506722534618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e3925fce880364a9ac93444c65fa6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobAmount: 0.02
+  bobSpeed: 2
 --- !u!54 &6758825640794552059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -122,7 +137,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.24, y: 0.12, z: 0.12}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &3586573458411111969
 PrefabInstance:
   m_ObjectHideFlags: 0
