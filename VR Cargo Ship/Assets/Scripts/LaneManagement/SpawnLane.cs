@@ -49,4 +49,10 @@ public class SpawnLane : MonoBehaviour {
 		this.entity.OnDestroyed -= EntityDestroyHandler;
 	}
 
+	private void OnDrawGizmos() {
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(leftBorder.position, 0.1f);
+		Gizmos.DrawWireSphere(rightBorder.position, 0.1f);
+	}
+
 }

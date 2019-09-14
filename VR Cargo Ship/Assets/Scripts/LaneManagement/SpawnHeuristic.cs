@@ -20,7 +20,6 @@ public class SpawnHeuristic : MonoBehaviour {
 		probability = new float[entityConfigs.Length];
 	}
 	
-
 	public int CurrentLevel {
 		set {
 			currentLevel = value;
@@ -126,9 +125,5 @@ public class SpawnHeuristic : MonoBehaviour {
 			}
 		}
 	}
-
-
-
-
-
+	
 }
