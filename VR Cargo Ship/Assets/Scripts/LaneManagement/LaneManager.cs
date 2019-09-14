@@ -8,20 +8,32 @@ public class LaneManager : MonoBehaviour {
 	public float spawnZoneSize = 0f;
 	[Tooltip("A value between 0 and 1 representing the size of the finish zone")]
 	public float finishZoneSize = 0f;
-
-	[Header("Lanes Visuals")]
-	public Color laneColorA;
-	public Color laneColorB;
-
-	private SpawnLane[] lanes;
-	private int currentLevel = 0;
-
-	//public delegate void LevelEvent();
-	//public LevelEvent OnFinishReached;
-
 	
-	public void SetLevel(int level) {
-		currentLevel = level;
+	private SpawnLane[] lanes;
+
+
+	public int TotalEmptyLanes {
+		get {
+			return 0; // Stub
+		}
+	}
+
+	public bool IsLaneEmpty(int lane) {
+		return false; // Stub
+	}
+
+	public int FirstEmptyLane {
+		get {
+			return 0; // Stub
+		}
+	}
+
+	public int NumberOfEntityType(EntitySpawnConfig entityConfig) {
+		return 0; // Stub
+	}
+
+	public void SpawnEntity(EntitySpawnConfig entityConfig, int lane, EntityMoveDirection direction) {
+		// Stub
 	}
 
 }
