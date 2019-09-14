@@ -26,12 +26,12 @@ public class GameManager : MonoBehaviour {
 
 
 	private void Start() {
-		SpawnShip();
+		
 	}
 
 	private void Update() {
 		if (!currentShip) {
-			return;
+			SpawnShip();
 		}
 
 		if (currentShip.transform.position.z >= finishLineOffset) {
@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour {
 	private void SpawnShip() {
 		currentShip = Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent<PlayerShip>();
 		currentShip.inputManager = inputManager;
+		currentShip.OnPlayerDeath += PlayerDeathHandler;
 	}
 
 	private void ReachFinishLine() {
@@ -51,6 +52,10 @@ public class GameManager : MonoBehaviour {
 		level++;
 		spawnHeuristic.CurrentLevel = level;
 		SpawnShip();
+	}
+
+	private void PlayerDeathHandler() {
+		currentShip.OnPlayerDeath -= PlayerDeathHandler;
 	}
 
 	private void OnDrawGizmos() {
