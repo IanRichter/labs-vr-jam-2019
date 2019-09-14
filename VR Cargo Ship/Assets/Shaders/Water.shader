@@ -88,7 +88,7 @@
 				} else if (laneArea > 0.0) {
 					float laneFactor = laneArea * _LaneCount;
 
-					if (fmod(laneFactor, 2) < 1.0) {
+					if (fmod(laneFactor, 2) >= 1.0) {
 						color = _LaneColorA;
 					} else {
 						color = _LaneColorB;
