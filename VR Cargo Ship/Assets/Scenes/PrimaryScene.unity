@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18084483, g: 0.22638245, b: 0.3072087, a: 1}
+  m_IndirectSpecularColor: {r: 0.18084541, g: 0.22638306, b: 0.3072095, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -969,5 +969,10 @@ PrefabInstance:
       propertyPath: laneManager
       value: 
       objectReference: {fileID: 506258561}
+    - target: {fileID: 8166548086194135464, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
+        type: 3}
+      propertyPath: currentLevel
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ac5f9dc60240d24c8ba629a1a6d4672, type: 3}

@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2121699430268567798}
   - component: {fileID: 8753082151116912397}
   - component: {fileID: 2311263432589130780}
-  - component: {fileID: 4119732055189211610}
+  - component: {fileID: 762578342919537732}
   m_Layer: 0
   m_Name: PirateShipEasy
   m_TagString: Untagged
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9829fba13439e443a82f0f39255de54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 0.15
   direction: 0
 --- !u!54 &2311263432589130780
 Rigidbody:
@@ -157,7 +157,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &4119732055189211610
+--- !u!65 &762578342919537732
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -7,9 +7,12 @@ public class SpawnHeuristic : MonoBehaviour {
 	[Header("Entity Config")]
 	public EntitySpawnConfig[] entityConfigs;
 
-	private int difficulty;
-	private int tweakValue = 3;
+	[SerializeField]
+	private int currentLevel;
+	private float difficulty;
+	private float tweakValue = 3.0f;
 	private double tickTimer = 0.0;
+	private double updateInterval = 1.0f;
 	private float[] probability;
 
 	public void Start()
@@ -17,12 +20,11 @@ public class SpawnHeuristic : MonoBehaviour {
 		probability = new float[entityConfigs.Length];
 	}
 	
-	private int currentLevel;
 	public int CurrentLevel {
 		set {
 			currentLevel = value;
 
-			difficulty = 1 - (tweakValue / tweakValue - currentLevel);
+			difficulty = 1.0f - (tweakValue / tweakValue - currentLevel);
 		}
 	}
 
@@ -41,12 +43,14 @@ public class SpawnHeuristic : MonoBehaviour {
 		{
 			probability[i] /= totalProb;
 
-			probability[i] = probability[i] * (tweakValue / (tweakValue + laneManager.NumberOfEntityType(entityConfigs[i]))) * (tweakValue / (tweakValue + ( laneManager.numLanes - laneManager.TotalEmptyLanes))) ;
+			int entityTypeCount = laneManager.NumberOfEntityType(entityConfigs[i]);
+			int totalCount = laneManager.TotalEmptyLanes;
+			probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount)) * (tweakValue / (tweakValue + (laneManager.numLanes - totalCount))) ;
 		}
 	}
 
 	private int selectEntity() {
-		int entityNum = entityConfigs.Length;
+		int entityNum = -1;
 
 		float randNum = Random.value;
 		float currentProb = 0f;
@@ -98,9 +102,9 @@ public class SpawnHeuristic : MonoBehaviour {
 		
 		tickTimer += Time.deltaTime;
 
-		if(tickTimer >= 100.0f)
+		if(tickTimer >= updateInterval)
 		{
-			tickTimer -= 100.0f;
+			tickTimer -= updateInterval;
 
 			getProbabilities();
 
@@ -110,15 +114,16 @@ public class SpawnHeuristic : MonoBehaviour {
 			{
 				entityNum = selectEntity();
 
-				laneManager.SpawnEntity(entityConfigs[entityNum], laneIndex, (EntityMoveDirection)Random.Range(0, 1));
+				if (entityNum >= 0)
+				{
+					laneManager.SpawnEntity(entityConfigs[entityNum], laneIndex, (EntityMoveDirection)Random.Range(0, 2));
+				}
+				else
+				{
+					Debug.Log("Decided to not spawn");
+				}
 			}
-
-
 		}
 	}
-
-
-
-
-
+	
 }
