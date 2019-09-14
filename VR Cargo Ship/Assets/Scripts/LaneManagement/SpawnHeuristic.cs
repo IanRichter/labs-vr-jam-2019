@@ -7,6 +7,8 @@ public class SpawnHeuristic : MonoBehaviour {
 	[Header("Entity Config")]
 	public EntitySpawnConfig[] entityConfigs;
 
+	[SerializeField]
+	private int currentLevel;
 	private float difficulty;
 	private float tweakValue = 3.0f;
 	private double tickTimer = 0.0;
@@ -19,7 +21,6 @@ public class SpawnHeuristic : MonoBehaviour {
 	}
 	
 
-	private int currentLevel;
 	public int CurrentLevel {
 		set {
 			currentLevel = value;
