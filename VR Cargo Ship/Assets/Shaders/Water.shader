@@ -7,6 +7,7 @@
 		_LaneCount ("Lane Count", Int) = 10
 		_StartPerc ("Start Percentage", Float) = 0.1
 		_EndPerc ("End Percentage", Float) = 0.9
+		_CheckerSize ("Checker Size", Float) = 0.02
 		_Shininess ("Shininess", Float) = 0.5
         _MainTex ("Texture", 2D) = "white" {}
     }
@@ -49,6 +50,7 @@
 			float4 _LaneColorB;
 			float _StartPerc;
 			float _EndPerc;
+			float _CheckerSize;
 			int _LaneCount;
 			float _Shininess;
 
@@ -75,7 +77,15 @@
 
 				float laneArea = ((1.0 - i.uv.y) - _StartPerc) / (_EndPerc - _StartPerc);
 
-				if (laneArea > 0.0 && laneArea < 1.0) {
+				if (laneArea > 1.0) {
+					float checker = floor(i.uv.x / _CheckerSize) + floor(i.uv.y / _CheckerSize);
+
+					if (fmod(checker, 2) < 1.0) {
+						color = _LaneColorA;
+					} else {
+						color = _LaneColorB;
+					}
+				} else if (laneArea > 0.0) {
 					float laneFactor = laneArea * _LaneCount;
 
 					if (fmod(laneFactor, 2) < 1.0) {
