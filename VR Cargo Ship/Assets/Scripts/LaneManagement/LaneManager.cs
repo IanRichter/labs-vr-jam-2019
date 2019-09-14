@@ -4,11 +4,10 @@ public class LaneManager : MonoBehaviour {
 
 	[Header("Lanes Config")]
 	public int numLanes = 10;
-	[Tooltip("A value between 0 and 1 representing the size of the ship spawn zone")]
-	public float spawnZoneSize = 0f;
-	[Tooltip("A value between 0 and 1 representing the size of the finish zone")]
-	public float finishZoneSize = 0f;
-	
+	public Transform startPoint;
+	public Transform endPoint;
+	public GameObject lanePrefab;
+
 	private SpawnLane[] lanes;
 
 
@@ -32,8 +31,21 @@ public class LaneManager : MonoBehaviour {
 		return 0; // Stub
 	}
 
-	public void SpawnEntity(EntitySpawnConfig entityConfig, int lane, EntityMoveDirection direction) {
-		// Stub
+	public void SpawnEntity(EntitySpawnConfig entityConfig, int laneNum, EntityMoveDirection direction) {
+		lanes[laneNum].SpawnEntity(entityConfig, direction);
+	}
+
+	private void Start() {
+		GenerateLanes(startPoint.position, endPoint.position);
+	}
+
+	private void GenerateLanes(Vector3 startPoint, Vector3 endPoint) {
+		lanes = new SpawnLane[numLanes];
+		for (int i = 0; i < numLanes; i++) {
+			Vector3 position = Vector3.Lerp(startPoint, endPoint, i / (float)(numLanes - 1));
+			SpawnLane lane = Instantiate(lanePrefab, position, Quaternion.identity).GetComponent<SpawnLane>();
+			lanes[i] = lane;
+		}
 	}
 
 }

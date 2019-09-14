@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8166548086194135466}
-  - component: {fileID: 8166548086194135467}
   - component: {fileID: 8166548086194135464}
   m_Layer: 0
-  m_Name: LaneManager
+  m_Name: SpawnHeuristic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,21 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8166548086194135467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8166548086194135465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d2e282e0f825a045aa655f6d45ed7bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numLanes: 10
-  spawnZoneSize: 0
-  finishZoneSize: 0
 --- !u!114 &8166548086194135464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e648681c080d2c48a3b16dbb2f1138f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laneManager: {fileID: 8166548086194135467}
+  laneManager: {fileID: 0}
   entityConfigs:
   - {fileID: 11400000, guid: e2551540fbf5bec4ab56a3b0414017be, type: 2}
   - {fileID: 11400000, guid: fcf3f78e59d6cb840b9852bc49a71004, type: 2}

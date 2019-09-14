@@ -15,6 +15,11 @@ public class PlayerShip : MonoBehaviour {
 
 	// Cargo
 	private int crates = 0;
+	public int Crates {
+		get {
+			return crates;
+		}
+	}
 
 	[Header("Particle Systems")]
 	public ParticleSystem crateDestroyParticleSystem;

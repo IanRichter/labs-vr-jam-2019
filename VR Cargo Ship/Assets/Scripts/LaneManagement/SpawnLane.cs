@@ -27,7 +27,21 @@ public class SpawnLane : MonoBehaviour {
 	}
 
 	public void SpawnEntity(EntitySpawnConfig entityConfig, EntityMoveDirection direction) {
+		if (activeObject) {
+			return;
+		}
 
+		this.entityConfig = entityConfig;
+
+		Zone spawnZone = direction == EntityMoveDirection.Left ? leftZone : rightZone;
+		activeObject = Instantiate(entityConfig.entityPrefab, spawnZone.transform.position, Quaternion.identity);
+
+		MovingEntity movingEntity = activeObject.GetComponent<MovingEntity>();
+		if (movingEntity) {
+			movingEntity.direction = direction;
+			movingEntity.OrientModel();
+			movingEntity.StartMoving();
+		}
 	}
 
 }

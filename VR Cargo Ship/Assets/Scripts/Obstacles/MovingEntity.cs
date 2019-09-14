@@ -6,14 +6,28 @@ public class MovingEntity : MonoBehaviour {
 
 	[HideInInspector]
 	public EntityMoveDirection direction = EntityMoveDirection.Left;
+
+	private bool isMoving = true;
 	
 
 	public void OrientModel() {
-		// Stub
+		if (direction == EntityMoveDirection.Right) {
+			transform.Rotate(Vector3.forward, 90);
+		}
 	}
 
-	public void Move() {
-		// Stub
+	public void StartMoving() {
+		isMoving = true;
+	}
+
+	private void Update() {
+		if (isMoving) {
+			Move();
+		}
+	}
+
+	private void Move() {
+		transform.position = transform.position + (Vector3.forward * moveSpeed * Time.deltaTime);
 	}
 
 }

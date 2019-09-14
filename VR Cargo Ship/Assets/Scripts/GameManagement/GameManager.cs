@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 
 	[Header("Components")]
 	public PlayerManager playerManager;
-	public LaneManager laneManager;
+	public SpawnHeuristic spawnHeuristic;
 	// public GameObject shipSelectMenu;
 	// public GameObject tutorialMenu;
 
@@ -18,6 +18,14 @@ public class GameManager : MonoBehaviour {
 	private int level = 1;
 
 	private PlayerShip currentShip;
-	
+
+
+	private void Start() {
+		playerManager.OnReachFinish += PlayerShipFinishHandler;
+	}
+
+	private void PlayerShipFinishHandler() {
+		score += Mathf.FloorToInt(currentShip.Crates * crateScoreModifier);
+	}
 
 }
