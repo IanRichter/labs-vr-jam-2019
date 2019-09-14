@@ -8,6 +8,8 @@ public class Obstacle : MonoBehaviour {
 	public delegate void EntityEvent(Obstacle entity);
 	public EntityEvent OnDestroyed;
 
+	private bool hasHitPlayer = false;
+
 
 	public void DestroyObject() {
 		OnDestroyed?.Invoke(this);
@@ -15,10 +17,15 @@ public class Obstacle : MonoBehaviour {
 	}
 
 	public void OnTriggerEnter(Collider other) {
+		if (hasHitPlayer) {
+			return;
+		}
+
 		PlayerShip playerShip = other.gameObject.GetComponent<PlayerShip>();
 		if (playerShip) {
 			playerShip.Damage(damage);
-			
+			hasHitPlayer = true;
+
 			if (isDestroyable) {
 				DestroyObject();
 			}

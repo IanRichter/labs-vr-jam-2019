@@ -31,14 +31,18 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	public void Update() {
-		// Stub
+		Move();
+	}
+
+	public void Move() {
+		transform.position += transform.forward * baseMoveSpeed * Time.deltaTime;
 	}
 
 	public void Damage(int amount) {
 		crates = Mathf.Max(crates - amount, 0);
 
 		if (crates == 0) {
-			Destroy(this.gameObject);
+			Destroy(gameObject);
 		}
 	}
 

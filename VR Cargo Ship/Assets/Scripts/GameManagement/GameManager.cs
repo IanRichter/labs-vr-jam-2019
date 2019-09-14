@@ -6,11 +6,15 @@ public class GameManager : MonoBehaviour {
 	public int maxHealth = 3;
 	public float crateScoreModifier = 10f;
 
+	[Header("Prefabs")]
+	public GameObject playerShipPrefab;
+
+	[Header("Player Management")]
+	public float finishLineOffset = 0f;
+	public Transform playerSpawnPoint;
+
 	[Header("Components")]
-	public PlayerManager playerManager;
 	public SpawnHeuristic spawnHeuristic;
-	// public GameObject shipSelectMenu;
-	// public GameObject tutorialMenu;
 
 	// Game state
 	private int health = 0;
@@ -21,11 +25,49 @@ public class GameManager : MonoBehaviour {
 
 
 	private void Start() {
-		playerManager.OnReachFinish += PlayerShipFinishHandler;
+		SpawnShip();
 	}
 
-	private void PlayerShipFinishHandler() {
+	private void Update() {
+		if (!currentShip) {
+			return;
+		}
+
+		if (currentShip.transform.position.z >= finishLineOffset) {
+			ReachFinishLine();
+		}
+	}
+
+	private void SpawnShip() {
+		currentShip = Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent<PlayerShip>();
+	}
+
+	private void ReachFinishLine() {
 		score += Mathf.FloorToInt(currentShip.Crates * crateScoreModifier);
+		Destroy(currentShip.gameObject);
+
+		level++;
+		spawnHeuristic.CurrentLevel = level;
+		SpawnShip();
+	}
+
+	private void OnDrawGizmos() {
+		// Spawn point
+		Gizmos.color = Color.green;
+		Gizmos.DrawWireSphere(playerSpawnPoint.position, 0.1f);
+		
+		// Finish line
+		Gizmos.color = Color.red;
+		Vector3 finishLine = new Vector3(
+			playerSpawnPoint.position.x,
+			playerSpawnPoint.position.y,
+			finishLineOffset
+		);
+		float lineLength = 1f;
+		Gizmos.DrawLine(
+			finishLine - new Vector3(lineLength, 0, 0),
+			finishLine - new Vector3(-lineLength, 0, 0)
+		);
 	}
 
 }
