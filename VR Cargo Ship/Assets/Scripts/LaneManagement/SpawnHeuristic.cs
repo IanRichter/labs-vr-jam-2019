@@ -121,7 +121,7 @@ public class SpawnHeuristic : MonoBehaviour {
 				}
 				else
 				{
-					Debug.Log("Decided to not spawn");
+					//Debug.Log("Decided to not spawn");
 				}
 			}
 		}

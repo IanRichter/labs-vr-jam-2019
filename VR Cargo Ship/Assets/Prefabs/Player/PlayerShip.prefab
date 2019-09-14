@@ -45,13 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8075557a5a9b6a4baecafd76a969d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 0.5
+  baseMoveSpeed: 0.3
   baseBoostMoveSpeed: 1
-  baseMoveSpeedAccel: 0.075
-  baseSteerSpeed: 0.5
+  baseMoveSpeedAccel: 0.07
+  baseSteerSpeed: 0.35
   baseSteerSpeedAccel: 0.05
   steerSpeed: 0
   inputManager: {fileID: 0}
+  mapEdge: 1
   crateDestroyParticleSystem: {fileID: 0}
 --- !u!65 &7997061040786774789
 BoxCollider:
@@ -73,6 +74,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3737195249553131516}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 5734ef767be8b094f81ec19f0f67309c,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerShip
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5734ef767be8b094f81ec19f0f67309c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -142,11 +148,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.004
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 5734ef767be8b094f81ec19f0f67309c,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerShip
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5734ef767be8b094f81ec19f0f67309c, type: 3}

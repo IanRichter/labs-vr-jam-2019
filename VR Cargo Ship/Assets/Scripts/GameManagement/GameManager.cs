@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject playerShipPrefab;
 	public float finishLineOffset = 0f;
 	public Transform playerSpawnPoint;
+	public float playerMapEdge = 0.8f;
 
 	[Header("Menus")]
 	public ConfirmMenu startScreen;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour {
 		}
 		set {
 			score = value;
-			scoreDisplay.SetScore(score);
+			//scoreDisplay.SetScore(score);
 		}
 	}
 
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour {
 		}
 		set {
 			health = value;
-			healthDisplay.SetHealth(health);
+			//healthDisplay.SetHealth(health);
 		}
 	}
 
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour {
 		}
 		set {
 			level = value;
-			levelDisplay.SetLevel(level);
+			//levelDisplay.SetLevel(level);
 		}
 	}
 
@@ -77,10 +78,11 @@ public class GameManager : MonoBehaviour {
 
 
 	private void Start() {
-		startScreen.OnConfirm += StartScreenConfirmHandler;
-		gameOverScreen.OnConfirm += GameOverScreenConfirmHandler;
+		//startScreen.OnConfirm += StartScreenConfirmHandler;
+		//gameOverScreen.OnConfirm += GameOverScreenConfirmHandler;
 
 		ResetGameState();
+		StartGame();
 	}
 
 	private void Update() {
@@ -144,6 +146,7 @@ public class GameManager : MonoBehaviour {
 	private void SpawnShip() {
 		playerShip = Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent<PlayerShip>();
 		playerShip.inputManager = inputManager;
+		playerShip.mapEdge = playerMapEdge;
 		playerShip.OnPlayerDeath += PlayerDeathHandler;
 	}
 
@@ -180,6 +183,18 @@ public class GameManager : MonoBehaviour {
 		Gizmos.DrawLine(
 			finishLine - new Vector3(lineLength, 0, 0),
 			finishLine - new Vector3(-lineLength, 0, 0)
+		);
+
+		// Player Map Edge
+		Gizmos.color = Color.blue;
+		lineLength = 2f;
+		Gizmos.DrawLine(
+			playerSpawnPoint.position + new Vector3(-playerMapEdge, 0, 0),
+			playerSpawnPoint.position + new Vector3(-playerMapEdge, 0, lineLength)
+		);
+		Gizmos.DrawLine(
+			playerSpawnPoint.position + new Vector3(playerMapEdge, 0, 0),
+			playerSpawnPoint.position + new Vector3(playerMapEdge, 0, lineLength)
 		);
 	}
 

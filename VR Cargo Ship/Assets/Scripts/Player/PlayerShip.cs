@@ -12,14 +12,17 @@ public class PlayerShip : MonoBehaviour {
 	[Header("Steering Movement")]
 	public float baseSteerSpeed = 0f;
 	public float baseSteerSpeedAccel = 0.05f;
-	public float steerSpeed = 0f;
 	private float steerSpeedModifier = 1f;
+	private float steerSpeed = 0f;
 
 	[HideInInspector]
 	public InputManager inputManager;
 
 	public delegate void PlayerDeathEvent();
 	public PlayerDeathEvent OnPlayerDeath;
+
+	[HideInInspector]
+	public float mapEdge = 1f;
 
 	// Cargo
 	private int crates = 0;
@@ -64,6 +67,7 @@ public class PlayerShip : MonoBehaviour {
 
 		Vector3 pos = transform.position;
 		pos.x += steerSpeed * Time.deltaTime;
+		pos.x = Mathf.Clamp(pos.x, -mapEdge, mapEdge);
 		transform.position = pos;
 	}
 
