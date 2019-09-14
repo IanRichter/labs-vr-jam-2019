@@ -5,7 +5,7 @@ public class SpawnLane : MonoBehaviour {
 	public Zone leftZone;
 	public Zone rightZone;
 
-	private MovingEntity movingEntity;
+	private Obstacle entity;
 	
 	private EntitySpawnConfig entityConfig;
 	public EntitySpawnConfig EntityConfig {
@@ -14,30 +14,47 @@ public class SpawnLane : MonoBehaviour {
 		}
 	}
 
-
 	public bool IsEmpty {
 		get {
-			return !movingEntity;
+			return !entity;
 		}
 	}
 
 	private void Start() {
-		
+		leftZone.OnObjectEnter += ZoneEnterHandler;
+		rightZone.OnObjectEnter += ZoneEnterHandler;
 	}
-
+	
 	public void SpawnEntity(EntitySpawnConfig entityConfig, EntityMoveDirection direction) {
-		if (movingEntity) {
+		if (entity) {
 			return;
 		}
-
+		
 		this.entityConfig = entityConfig;
 
 		Zone spawnZone = direction == EntityMoveDirection.Left ? leftZone : rightZone;
-		movingEntity = Instantiate(entityConfig.entityPrefab, spawnZone.transform.position, Quaternion.identity).GetComponent<MovingEntity>();
+		GameObject newObject = Instantiate(entityConfig.entityPrefab, spawnZone.transform.position, Quaternion.identity);
+
+		// Obstacle
+		entity = newObject.GetComponent<Obstacle>();
+		entity.OnDestroyed += EntityDestroyHandler;
+
+		// MovingEntity
+		MovingEntity movingEntity = newObject.GetComponent<MovingEntity>();
+		movingEntity.direction = direction;
+		movingEntity.OrientModel();
+		movingEntity.StartMoving();
 	}
 
-	private void ZoneEnterHandler(Collider other) {
+	private void ZoneEnterHandler(GameObject other) {
+		if (other == entity.gameObject) {
+			entityConfig = null;
+			Destroy(entity);
+		}
+	}
 
+	private void EntityDestroyHandler(Obstacle entity) {
+		this.entity.OnDestroyed -= EntityDestroyHandler;
 	}
 
 }
