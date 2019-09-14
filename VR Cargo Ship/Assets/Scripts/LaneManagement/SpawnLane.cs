@@ -24,8 +24,8 @@ public class SpawnLane : MonoBehaviour {
 	public void ConfigSpawnPoints(float offset)
 	{
 		laneOffset = offset;
-		leftPos = new Vector3(-laneOffset, 0.0f, 0.0f);
-		rightPos = new Vector3(laneOffset, 0.0f, 0.0f);
+		leftPos = transform.position + (new Vector3(-laneOffset, 0.0f, 0.0f));
+		rightPos = transform.position + (new Vector3(laneOffset, 0.0f, 0.0f));
 	}
 	
 	public void SpawnEntity(EntitySpawnConfig entityConfig, EntityMoveDirection direction) {
