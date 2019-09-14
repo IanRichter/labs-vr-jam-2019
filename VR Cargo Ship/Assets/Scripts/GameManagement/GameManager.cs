@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
 	[Header("Components")]
 	public SpawnHeuristic spawnHeuristic;
+	public InputManager inputManager;
 
 	// Game state
 	private int health = 0;
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour {
 
 	private void SpawnShip() {
 		currentShip = Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent<PlayerShip>();
+		currentShip.inputManager = inputManager;
 	}
 
 	private void ReachFinishLine() {

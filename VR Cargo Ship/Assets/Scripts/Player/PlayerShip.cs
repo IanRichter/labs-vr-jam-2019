@@ -13,6 +13,9 @@ public class PlayerShip : MonoBehaviour {
 	public float baseSteerSpeed = 0f;
 	private float steerSpeedModifier = 1f;
 
+	[HideInInspector]
+	public InputManager inputManager;
+
 	// Cargo
 	private int crates = 0;
 	public int Crates {
@@ -32,10 +35,27 @@ public class PlayerShip : MonoBehaviour {
 
 	public void Update() {
 		Move();
+		Steer();
 	}
 
-	public void Move() {
-		transform.position += transform.forward * baseMoveSpeed * Time.deltaTime;
+	private void Move() {
+		float targetMoveSpeed = inputManager.IsBoosting ? baseBoostMoveSpeed : baseMoveSpeed;
+		moveSpeed = Mathf.MoveTowards(moveSpeed, targetMoveSpeed, baseMoveSpeedAccel);
+	
+		transform.position += transform.forward * moveSpeed * Time.deltaTime;
+	}
+
+	private void Steer() {
+		if (inputManager.IsLeft) {
+			Vector3 pos = transform.position;
+			pos.x -= baseSteerSpeed * Time.deltaTime;
+			transform.position = pos;
+		}
+		if (inputManager.IsRight) {
+			Vector3 pos = transform.position;
+			pos.x += baseSteerSpeed * Time.deltaTime;
+			transform.position = pos;
+		}
 	}
 
 	public void Damage(int amount) {
