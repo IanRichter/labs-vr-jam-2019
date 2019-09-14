@@ -46,7 +46,7 @@ public class LaneManager : MonoBehaviour {
 		return lanes[lane].IsEmpty;
 	}
 
-	public int FirstEmptyLane {
+	public int FirstEmptyLane { 
 		get {
 			for (int i = 0; i < numLanes; i++)
 			{
