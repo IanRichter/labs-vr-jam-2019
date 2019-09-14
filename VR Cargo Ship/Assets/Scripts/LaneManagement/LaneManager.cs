@@ -16,17 +16,12 @@ public class LaneManager : MonoBehaviour {
 	private SpawnLane[] lanes;
 	private int currentLevel = 0;
 
+	//public delegate void LevelEvent();
+	//public LevelEvent OnFinishReached;
 
-	public void StartLevel(int level) {
-
-	}
-
-	public void StopLevel() {
-
-	}
-
-	public void SpawnObjectInLane(GameObject gameObject, int lane, EntityMoveDirection direction) {
-
+	
+	public void SetLevel(int level) {
+		currentLevel = level;
 	}
 
 }
