@@ -47,8 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMoveSpeed: 0.5
   baseBoostMoveSpeed: 1
-  baseMoveSpeedAccel: 0.1
+  baseMoveSpeedAccel: 0.075
   baseSteerSpeed: 0.5
+  baseSteerSpeedAccel: 0.05
+  steerSpeed: 0
+  inputManager: {fileID: 0}
   crateDestroyParticleSystem: {fileID: 0}
 --- !u!65 &7997061040786774789
 BoxCollider:
