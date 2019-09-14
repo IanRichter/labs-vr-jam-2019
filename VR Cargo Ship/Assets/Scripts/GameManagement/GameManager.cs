@@ -10,9 +10,7 @@ public class GameManager : MonoBehaviour {
 	private int health = 0;
 	private int score = 0;
 
-
-	public void LoseLife() {
-		// Stub
-	}
+	private PlayerShip currentShip;
+	
 
 }
