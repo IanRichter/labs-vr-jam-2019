@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour {
 	private void Start() {
 		leftHand.grabPinchAction.AddOnChangeListener(LeftTriggerHandler, SteamVR_Input_Sources.LeftHand);
 		rightHand.grabPinchAction.AddOnChangeListener(RightTriggerHandler, SteamVR_Input_Sources.RightHand);
-		rightHand.grabPinchAction.AddOnChangeListener(GripHandler, SteamVR_Input_Sources.Any);
+		rightHand.grabGripAction.AddOnChangeListener(GripHandler, SteamVR_Input_Sources.Any);
 	}
 
 	public bool IsLeft {
