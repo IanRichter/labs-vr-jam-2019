@@ -45,7 +45,8 @@ public class SpawnHeuristic : MonoBehaviour {
 
 			int entityTypeCount = laneManager.NumberOfEntityType(entityConfigs[i]);
 			int totalCount = laneManager.TotalEmptyLanes;
-			probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount)) * (tweakValue / (tweakValue + (laneManager.numLanes - totalCount))) ;
+			//probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount)) * (tweakValue / (tweakValue + (laneManager.numLanes - totalCount))) ;
+			probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount));
 		}
 	}
 
