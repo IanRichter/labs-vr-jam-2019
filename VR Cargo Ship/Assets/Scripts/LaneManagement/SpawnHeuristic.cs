@@ -9,6 +9,7 @@ public class SpawnHeuristic : MonoBehaviour {
 
 	[SerializeField]
 	private int currentLevel;
+
 	private float difficulty;
 	private float tweakValue = 3.0f;
 	private double tickTimer = 0.0;

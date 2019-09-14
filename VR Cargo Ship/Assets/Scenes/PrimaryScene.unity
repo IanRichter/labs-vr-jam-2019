@@ -503,6 +503,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2216c0a257f02174783da16148ccd885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1306479849 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7822937475207615650, guid: 31f6626d4c1dda04e8cc1430d3faf8a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7822937475024892333}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b9786fa5644b34aa93a25963b633ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1307250499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -843,6 +855,11 @@ PrefabInstance:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 1170710895}
+    - target: {fileID: 1095867387082848115, guid: c7d6701ee468d5e4c880e7aba8279d4b,
+        type: 3}
+      propertyPath: waterSimulator
+      value: 
+      objectReference: {fileID: 1306479849}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7d6701ee468d5e4c880e7aba8279d4b, type: 3}
 --- !u!1001 &7822937475024892333
@@ -917,6 +934,10 @@ PrefabInstance:
       propertyPath: wave2Height
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 506258561, guid: 31f6626d4c1dda04e8cc1430d3faf8a2, type: 3}
+      propertyPath: waterSimulator
+      value: 
+      objectReference: {fileID: 1306479849}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f6626d4c1dda04e8cc1430d3faf8a2, type: 3}
 --- !u!1001 &8166548084923818725

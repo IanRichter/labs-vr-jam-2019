@@ -22,7 +22,7 @@ public class WaterSimulator : MonoBehaviour
 	private Vector2Int size;
 
 	private float currentTime;
-
+	
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -74,6 +74,50 @@ public class WaterSimulator : MonoBehaviour
 		mesh.uv = uvs;
 		mesh.triangles = indices;
 		mesh.RecalculateNormals();
+	}
+
+	public float GetHeightAtWorldPosition(Vector3 position)
+	{
+		Vector3 localPosition = transform.InverseTransformPoint(position);
+
+		float x = (localPosition.x - area.x) / squareSize;
+		float y = (localPosition.z - area.y) / squareSize;
+
+		x = Mathf.Clamp(x, 0.0f, size.x + 1.0f);
+		y = Mathf.Clamp(y, 0.0f, size.y + 1.0f);
+
+		int ix = Mathf.Clamp(Mathf.FloorToInt(x), 0, size.x);
+		float fx = x - ix;
+		int iy = Mathf.Clamp(Mathf.FloorToInt(y), 0, size.y);
+		float fy = y - iy;
+		
+		float h00 = heights[ix + iy * (size.x + 1)];
+		float h10 = heights[(ix+1) + iy * (size.x + 1)];
+		float h01 = heights[ix + (iy+1) * (size.x + 1)];
+		float h11 = heights[(ix+1) + (iy+1) * (size.x + 1)];
+
+		float h0 = h00 * (1.0f - fx) + h10 * fx;
+		float h1 = h01 * (1.0f - fx) + h11 * fx;
+
+		float height = h0 * (1.0f - fy) + h1 * fy;
+
+		return height;
+	}
+	public Vector3 GetNormalAtWorldPosition(Vector3 position)
+	{
+		Vector3 localPosition = transform.InverseTransformPoint(position);
+
+		float x = (localPosition.x - area.x) / squareSize;
+		float y = (localPosition.z - area.y) / squareSize;
+	
+		int ix = Mathf.Clamp(Mathf.FloorToInt(x), 0, size.x);
+		int iy = Mathf.Clamp(Mathf.FloorToInt(y), 0, size.y);
+
+		float h00 = heights[ix + iy * (size.x + 1)];
+		float h10 = heights[(ix + 1) + iy * (size.x + 1)];
+		float h01 = heights[ix + (iy + 1) * (size.x + 1)];
+		
+		return Vector3.Normalize(new Vector3(h10 - h00, squareSize, h01 - h00));
 	}
 
 	void UpdateVertices()
