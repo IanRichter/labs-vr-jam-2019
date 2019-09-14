@@ -5,12 +5,7 @@ public class SpawnLane : MonoBehaviour {
 	public Zone leftZone;
 	public Zone rightZone;
 
-	private GameObject activeObject;
-	public GameObject ActiveObject {
-		get {
-			return activeObject;
-		}
-	}
+	private MovingEntity movingEntity;
 	
 	private EntitySpawnConfig entityConfig;
 	public EntitySpawnConfig EntityConfig {
@@ -22,26 +17,27 @@ public class SpawnLane : MonoBehaviour {
 
 	public bool IsEmpty {
 		get {
-			return !activeObject;
+			return !movingEntity;
 		}
 	}
 
+	private void Start() {
+		
+	}
+
 	public void SpawnEntity(EntitySpawnConfig entityConfig, EntityMoveDirection direction) {
-		if (activeObject) {
+		if (movingEntity) {
 			return;
 		}
 
 		this.entityConfig = entityConfig;
 
 		Zone spawnZone = direction == EntityMoveDirection.Left ? leftZone : rightZone;
-		activeObject = Instantiate(entityConfig.entityPrefab, spawnZone.transform.position, Quaternion.identity);
+		movingEntity = Instantiate(entityConfig.entityPrefab, spawnZone.transform.position, Quaternion.identity).GetComponent<MovingEntity>();
+	}
 
-		MovingEntity movingEntity = activeObject.GetComponent<MovingEntity>();
-		if (movingEntity) {
-			movingEntity.direction = direction;
-			movingEntity.OrientModel();
-			movingEntity.StartMoving();
-		}
+	private void ZoneEnterHandler(Collider other) {
+
 	}
 
 }
