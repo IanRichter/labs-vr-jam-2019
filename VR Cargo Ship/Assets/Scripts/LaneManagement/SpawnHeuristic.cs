@@ -31,9 +31,6 @@ public class SpawnHeuristic : MonoBehaviour {
 
 		int length = entityConfigs.Length;
 		float totalProb = 0f;
-		
-		float max;
-		float min;
 
 		for (int i=0; i < length; i++)
 		{

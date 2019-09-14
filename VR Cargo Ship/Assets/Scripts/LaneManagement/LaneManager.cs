@@ -13,11 +13,12 @@ public class LaneManager : MonoBehaviour {
 
 
 	private void Start() {
+		lanes = new SpawnLane[numLanes];
 		GenerateLanes(startPoint.position, endPoint.position);
 	}
 
 	private void GenerateLanes(Vector3 startPoint, Vector3 endPoint) {
-		lanes = new SpawnLane[numLanes];
+		
 		for (int i = 0; i < numLanes; i++) {
 			Vector3 position = Vector3.Lerp(startPoint, endPoint, i / (float)(numLanes - 1));
 			//SpawnLane lane = Instantiate(lanePrefab, position, Quaternion.identity).GetComponent<SpawnLane>();
@@ -28,22 +29,49 @@ public class LaneManager : MonoBehaviour {
 
 	public int TotalEmptyLanes {
 		get {
-			return 0; // Stub
+			int totalEmpty = 0;
+			for(int i=0; i < numLanes; i++)
+			{
+				if (IsLaneEmpty( i ))
+				{
+					totalEmpty++;
+				}
+			}
+
+			return totalEmpty;
 		}
 	}
 
 	public bool IsLaneEmpty(int lane) {
-		return false; // Stub
+		return lanes[lane].IsEmpty;
 	}
 
 	public int FirstEmptyLane {
 		get {
-			return 0; // Stub
+			for (int i = 0; i < numLanes; i++)
+			{
+				if (IsLaneEmpty(i))
+				{
+					return i;
+				}
+			}
+
+			return 0;
 		}
 	}
 
 	public int NumberOfEntityType(EntitySpawnConfig entityConfig) {
-		return 0; // Stub
+		int numOfEntity = 0;
+
+		for (int i = 0; i < numLanes; i++)
+		{
+			if (lanes[i].EntityConfig == entityConfig)
+			{
+				numOfEntity++;
+			}
+		}
+
+		return numOfEntity;
 	}
 
 	public void SpawnEntity(EntitySpawnConfig entityConfig, int laneNum, EntityMoveDirection direction) {
