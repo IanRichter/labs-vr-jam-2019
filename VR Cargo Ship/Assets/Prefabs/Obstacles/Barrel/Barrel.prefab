@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e3925fce880364a9ac93444c65fa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobAmount: 0.015
+  bobAmount: 0.01
   bobSpeed: 3
 --- !u!54 &1033150886063923114
 Rigidbody:

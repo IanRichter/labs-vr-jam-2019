@@ -4,13 +4,13 @@ public class LaneManager : MonoBehaviour {
 
 	[Header("Lanes Config")]
 	public int numLanes = 10;
+	public float laneOffset = 1.0f;
 	public Transform startPoint;
 	public Transform endPoint;
 	public GameObject laneContainer;
 	public GameObject lanePrefab;
 
 	private SpawnLane[] lanes;
-
 
 	private void Start() {
 		lanes = new SpawnLane[numLanes];
@@ -23,6 +23,7 @@ public class LaneManager : MonoBehaviour {
 			Vector3 position = Vector3.Lerp(startPoint, endPoint, i / (float)(numLanes - 1));
 			//SpawnLane lane = Instantiate(lanePrefab, position, Quaternion.identity).GetComponent<SpawnLane>();
 			SpawnLane lane = Instantiate(lanePrefab, position, Quaternion.identity).GetComponent<SpawnLane>();
+			lane.ConfigSpawnPoints(laneOffset);
 			lanes[i] = lane;
 		}
 	}
@@ -78,4 +79,20 @@ public class LaneManager : MonoBehaviour {
 		lanes[laneNum].SpawnEntity(entityConfig, direction);
 	}
 
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+
+		Vector3 leftStart = startPoint.position;
+		leftStart.x = -laneOffset;
+		Vector3 rightStart = endPoint.position;
+		rightStart.x = -laneOffset;
+		Gizmos.DrawLine(leftStart, rightStart);
+
+		leftStart = startPoint.position;
+		leftStart.x = laneOffset;
+		rightStart = endPoint.position;
+		rightStart.x = laneOffset;
+		Gizmos.DrawLine(leftStart, rightStart);
+	}
 }
