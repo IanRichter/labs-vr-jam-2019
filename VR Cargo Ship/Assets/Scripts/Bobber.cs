@@ -57,7 +57,6 @@ public class Bobber : MonoBehaviour
 		position.y = originalPosition.y + currentHeightOffset + bobOffset;
 		transform.position = position;
 	}
-
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.green;

@@ -46,6 +46,7 @@ public class WaterSimulator : MonoBehaviour
 		meshFilter.mesh = mesh;
 
 		size.x = (int)(area.width / squareSize);
+		squareSize = area.width / size.x;
 		size.y = (int)(area.height / squareSize);
 		
 		vertices = new Vector3[size.x * size.y * 6];
@@ -90,16 +91,20 @@ public class WaterSimulator : MonoBehaviour
 		float fx = x - ix;
 		int iy = Mathf.Clamp(Mathf.FloorToInt(y), 0, size.y);
 		float fy = y - iy;
-		
-		float h00 = heights[ix + iy * (size.x + 1)];
-		float h10 = heights[(ix+1) + iy * (size.x + 1)];
-		float h01 = heights[ix + (iy+1) * (size.x + 1)];
-		float h11 = heights[(ix+1) + (iy+1) * (size.x + 1)];
 
-		float h0 = h00 * (1.0f - fx) + h10 * fx;
-		float h1 = h01 * (1.0f - fx) + h11 * fx;
+		float height = 0.0f;
+		if (heights != null)
+		{
+			float h00 = heights[ix + iy * (size.x + 1)];
+			float h10 = heights[(ix + 1) + iy * (size.x + 1)];
+			float h01 = heights[ix + (iy + 1) * (size.x + 1)];
+			float h11 = heights[(ix + 1) + (iy + 1) * (size.x + 1)];
 
-		float height = h0 * (1.0f - fy) + h1 * fy;
+			float h0 = h00 * (1.0f - fx) + h10 * fx;
+			float h1 = h01 * (1.0f - fx) + h11 * fx;
+
+			height = h0 * (1.0f - fy) + h1 * fy;
+		}
 
 		return height;
 	}
@@ -113,11 +118,17 @@ public class WaterSimulator : MonoBehaviour
 		int ix = Mathf.Clamp(Mathf.FloorToInt(x), 0, size.x);
 		int iy = Mathf.Clamp(Mathf.FloorToInt(y), 0, size.y);
 
-		float h00 = heights[ix + iy * (size.x + 1)];
-		float h10 = heights[(ix + 1) + iy * (size.x + 1)];
-		float h01 = heights[ix + (iy + 1) * (size.x + 1)];
-		
-		return Vector3.Normalize(new Vector3(h00 - h10, squareSize, h00 - h01));
+		Vector3 normal = new Vector3();
+
+		if (heights != null)
+		{
+			float h00 = heights[ix + iy * (size.x + 1)];
+			float h10 = heights[(ix + 1) + iy * (size.x + 1)];
+			float h01 = heights[ix + (iy + 1) * (size.x + 1)];
+			normal = Vector3.Normalize(new Vector3(h00 - h10, squareSize, h00 - h01));
+		}
+
+		return normal;
 	}
 
 	void UpdateVertices()
