@@ -46,6 +46,7 @@ public class SpawnLane : MonoBehaviour {
 
 		// Obstacle
 		entity = newObject.GetComponent<Obstacle>();
+		entity.entityDeadPrefab = entityConfig.entityDeadPrefab;
 		entity.OnDestroyed += EntityDestroyHandler;
 
 		// MovingEntity
