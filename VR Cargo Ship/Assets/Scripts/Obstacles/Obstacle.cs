@@ -20,8 +20,8 @@ public class Obstacle : MonoBehaviour {
 
 	private void Die()
 	{
-		Destroy(gameObject);
 		GameObject deadObject = Instantiate(entityDeadPrefab, transform.position, transform.rotation);
+		Destroy(gameObject);
 	}
 
 	public void OnTriggerEnter(Collider other) {

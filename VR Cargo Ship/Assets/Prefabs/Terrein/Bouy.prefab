@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e3925fce880364a9ac93444c65fa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobAmount: 0.02
+  bobAmount: 0.005
   bobSpeed: 2
-  heightAdjustSpeed: 2
+  heightAdjustSpeed: 5
   tiltFactor: 1
   tiltSpeed: 1
   waterSimulator: {fileID: 0}

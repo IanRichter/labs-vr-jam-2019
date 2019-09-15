@@ -51,9 +51,11 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 0}
   playerMapEdge: 0.7
   startScreen: {fileID: 0}
+  respawnScreen: {fileID: 0}
   gameOverScreen: {fileID: 0}
   scoreDisplay: {fileID: 0}
-  healthDisplay: {fileID: 0}
   levelDisplay: {fileID: 0}
+  healthDisplay: {fileID: 0}
+  crateDisplay: {fileID: 0}
   spawnHeuristic: {fileID: 0}
   inputManager: {fileID: 0}
