@@ -14,12 +14,11 @@ public class Obstacle : MonoBehaviour {
 	public GameObject entityDeadPrefab;
 
 	public void DestroyObject() {
-		OnDestroyed?.Invoke(this);
 		Destroy(gameObject);
 	}
 
-	private void Die()
-	{
+	private void Die() {
+		OnDestroyed?.Invoke(this);
 		GameObject deadObject = Instantiate(entityDeadPrefab, transform.position, transform.rotation);
 		Destroy(gameObject);
 	}

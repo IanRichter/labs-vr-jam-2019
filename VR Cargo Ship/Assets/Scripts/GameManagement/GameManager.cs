@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour {
 	private void Start() {
 		// Menu Handlers
 		startScreen.OnConfirm += StartMenuConfirmHandler;
+		tutorialScreen.OnConfirm += TutorialMenuConfirmHandler;
 		respawnScreen.OnConfirm += RespawnMenuConfirmHandler;
 		gameOverScreen.OnConfirm += GameOverMenuConfirmHandler;
 
