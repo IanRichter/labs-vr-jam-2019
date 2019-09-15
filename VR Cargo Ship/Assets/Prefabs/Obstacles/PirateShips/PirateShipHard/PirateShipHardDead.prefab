@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1196828152838330189}
   - component: {fileID: 8217669094521196308}
   - component: {fileID: 7859775381276478380}
-  - component: {fileID: -2528307849556523627}
+  - component: {fileID: -1120413838186839168}
   m_Layer: 0
   m_Name: PirateShipHardDead
   m_TagString: Untagged
@@ -64,7 +64,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!82 &-2528307849556523627
+--- !u!82 &-1120413838186839168
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,7 +77,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: b67f2153e2a301b44bf416e14584c283, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
