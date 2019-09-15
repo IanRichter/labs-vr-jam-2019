@@ -18,6 +18,8 @@ public class PlayerShip : MonoBehaviour {
 	public float tiltAccel = 1.0f;
 	private float tiltAngle = 0f;
 
+	public GameObject entityDeadPrefab;
+
 	[HideInInspector]
 	public InputManager inputManager;
 
@@ -32,7 +34,6 @@ public class PlayerShip : MonoBehaviour {
 
 	[Header("Particle Systems")]
 	public ParticleSystem crateDestroyParticleSystem;
-
 	
 	public void Update() {
 		Move();
@@ -73,6 +74,11 @@ public class PlayerShip : MonoBehaviour {
 
 	public void Damage(int amount) {
 		OnPlayerDamaged?.Invoke(amount);
+	}
+
+	public void OnDestroy()
+	{
+		GameObject deadObject = Instantiate(entityDeadPrefab, transform.position, transform.rotation);
 	}
 
 	public void OnDrawGizmos() {
