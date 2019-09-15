@@ -119,8 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e3925fce880364a9ac93444c65fa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobAmount: 0.008
+  bobAmount: 0.004
   bobSpeed: 3
+  heightAdjustSpeed: 2
+  tiltFactor: 1
+  tiltSpeed: 0.1
 --- !u!54 &2311263432589130780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,7 +164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7743736055351655858}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.07, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2039457923540842677}
@@ -176,6 +179,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1874541426141934965}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 1abcd1722176e664da1733a9765b4d21,
+        type: 3}
+      propertyPath: m_Name
+      value: Model
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1abcd1722176e664da1733a9765b4d21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -245,11 +253,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.003000002
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 1abcd1722176e664da1733a9765b4d21,
-        type: 3}
-      propertyPath: m_Name
-      value: Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1abcd1722176e664da1733a9765b4d21, type: 3}

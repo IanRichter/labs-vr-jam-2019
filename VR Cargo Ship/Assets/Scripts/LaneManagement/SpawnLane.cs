@@ -7,7 +7,9 @@ public class SpawnLane : MonoBehaviour {
 	private Vector3 rightPos;
 
 	private Obstacle entity;
-	
+
+	private WaterSimulator waterSimulator;
+
 	private EntitySpawnConfig entityConfig;
 	public EntitySpawnConfig EntityConfig {
 		get {
@@ -21,8 +23,10 @@ public class SpawnLane : MonoBehaviour {
 		}
 	}
 
-	public void ConfigSpawnPoints(float offset)
+	public void ConfigSpawnPoints(WaterSimulator waterSimulator, float offset)
 	{
+		this.waterSimulator = waterSimulator;
+
 		laneOffset = offset;
 		leftPos = transform.position + (new Vector3(-laneOffset, 0.0f, 0.0f));
 		rightPos = transform.position + (new Vector3(laneOffset, 0.0f, 0.0f));
@@ -49,6 +53,12 @@ public class SpawnLane : MonoBehaviour {
 		movingEntity.direction = direction;
 		movingEntity.OrientModel();
 		movingEntity.StartMoving(spawnPos, endPos);
+
+		Bobber bobber = newObject.GetComponent<Bobber>();
+		if (bobber)
+		{
+			bobber.Config(waterSimulator);
+		}
 	}
 	
 	private void EntityDestroyHandler(Obstacle entity) {

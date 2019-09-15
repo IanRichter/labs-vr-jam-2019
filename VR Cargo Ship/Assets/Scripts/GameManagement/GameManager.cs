@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour {
 
 
 	private void Start() {
+
 		//startScreen.OnConfirm += StartScreenConfirmHandler;
 		//gameOverScreen.OnConfirm += GameOverScreenConfirmHandler;
 

@@ -13,7 +13,7 @@ public class MovingEntity : MonoBehaviour {
 	public EntityMoveDirection direction = EntityMoveDirection.Left;
 
 	private bool isMoving = false;
-	
+
 	public void OrientModel() {
 		if (direction == EntityMoveDirection.Right) {
 			transform.Rotate(Vector3.up, -90);
