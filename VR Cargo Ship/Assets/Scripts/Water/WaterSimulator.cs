@@ -46,6 +46,7 @@ public class WaterSimulator : MonoBehaviour
 		meshFilter.mesh = mesh;
 
 		size.x = (int)(area.width / squareSize);
+		squareSize = area.width / size.x;
 		size.y = (int)(area.height / squareSize);
 		
 		vertices = new Vector3[size.x * size.y * 6];
