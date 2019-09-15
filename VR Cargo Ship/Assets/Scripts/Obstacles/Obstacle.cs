@@ -10,10 +10,18 @@ public class Obstacle : MonoBehaviour {
 
 	private bool hasHitPlayer = false;
 
+	[HideInInspector]
+	public GameObject entityDeadPrefab;
 
 	public void DestroyObject() {
 		OnDestroyed?.Invoke(this);
 		Destroy(gameObject);
+	}
+
+	private void Die()
+	{
+		Destroy(gameObject);
+		GameObject deadObject = Instantiate(entityDeadPrefab, transform.position, transform.rotation);
 	}
 
 	public void OnTriggerEnter(Collider other) {
@@ -27,7 +35,7 @@ public class Obstacle : MonoBehaviour {
 			hasHitPlayer = true;
 
 			if (isDestroyable) {
-				DestroyObject();
+				Die();
 			}
 		}
 	}
