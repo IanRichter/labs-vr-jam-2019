@@ -87,7 +87,6 @@ public class GameManager : MonoBehaviour {
 		gameOverScreen.OnConfirm += GameOverMenuConfirmHandler;
 
 		// Start
-		ResetGameState();
 		ShowStartMenu();
 	}
 
@@ -176,6 +175,7 @@ public class GameManager : MonoBehaviour {
 	private void ShowStartMenu() {
 		Debug.Log("ShowStartMenu");
 		activeGameState = GameState.Start;
+		ResetGameState();
 		ShowMenu(startScreen);
 	}
 
@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour {
 
 	private void PlayerReachFinishLine() {
 		Score += Mathf.FloorToInt(playerShip.Crates * crateScoreModifier);
-		Level++;
+		Level += 1;
 		spawnHeuristic.CurrentLevel = Level;
 		
 		Destroy(playerShip.gameObject);
@@ -237,7 +237,7 @@ public class GameManager : MonoBehaviour {
 	private void PlayerDeathHandler() {
 		playerShip.OnPlayerDeath -= PlayerDeathHandler;
 
-		Health--;
+		Health -= 1;
 		if (Health <= 0) {
 			ShowGameOverMenu();
 		}

@@ -10,22 +10,28 @@ public class SpawnHeuristic : MonoBehaviour {
 	[SerializeField]
 	private int currentLevel;
 
+	[SerializeField]
+	private float difficultyRamp = 10.0f;
+
+	[SerializeField]
+	private float probabilityRangeFactor = 2.0f;
+
 	public float difficulty;
 	private float tweakValue = 3.0f;
 	private double tickTimer = 0.0;
 	private double updateInterval = 1.0f;
-	private float[] probability;
+	private float[] probabilities;
 
 	public void Start()
 	{
-		probability = new float[entityConfigs.Length + 1];
+		probabilities = new float[entityConfigs.Length + 1];
 	}
 	
 	public int CurrentLevel {
 		set {
 			currentLevel = value;
 
-			difficulty = 1.0f - (3f / (3f + currentLevel));
+			difficulty = 1.0f - (difficultyRamp / (difficultyRamp + currentLevel));
 		}
 	}
 
@@ -38,28 +44,30 @@ public class SpawnHeuristic : MonoBehaviour {
 
 		for (int i=0; i < length; i++)
 		{
+			float probability = 0.0f;
+
 			if (i == 0)
 			{
-				probability[i] = 1 - difficulty;
+				probability = 1 - difficulty;
 			}
 			else
 			{
-				probability[i] = (1 - Mathf.Abs(difficulty - entityConfigs[i - 1].difficulty));
+				probability = Mathf.Max(1 - Mathf.Abs(difficulty - entityConfigs[i - 1].difficulty) * probabilityRangeFactor, 0.0f);
 				entityTypeCount = laneManager.NumberOfEntityType(entityConfigs[i -1 ]);
 				totalCount = laneManager.TotalEmptyLanes;
 			}
 
-			
-			//probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount)) * (5f / (5f + (laneManager.numLanes - totalCount)));
-			probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount));
 
-			totalProb += probability[i];
+			//probability = probability * (tweakValue / (tweakValue + entityTypeCount)) * (5f / (5f + (laneManager.numLanes - totalCount)));
+			//probability = probability * (tweakValue / (tweakValue + entityTypeCount));
+
+			totalProb += probability;
+			probabilities[i] = probability;
 		}
-
-		for(int i=0; i < length; i++)
+		
+		for (int i=0; i < length; i++)
 		{
-			
-			probability[i] /= totalProb;
+			probabilities[i] /= totalProb;
 		}
 	}
 
@@ -70,9 +78,9 @@ public class SpawnHeuristic : MonoBehaviour {
 		float currentProb = 0f;
 
 
-		for(int i=0; i < probability.Length; i++)
+		for(int i=0; i < probabilities.Length; i++)
 		{
-			currentProb += probability[i];
+			currentProb += probabilities[i];
 			if (randNum <= currentProb)
 			{
 				entityNum = i - 1;
