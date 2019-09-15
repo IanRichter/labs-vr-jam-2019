@@ -6,13 +6,12 @@ public class PlayerShip : MonoBehaviour {
 	public float baseMoveSpeed = 0f;
 	public float baseBoostMoveSpeed = 0f;
 	public float baseMoveSpeedAccel = 0.075f;
-	//private float moveSpeedModifier = 1f;
 	private float moveSpeed = 0;
 
 	[Header("Steering Movement")]
 	public float baseSteerAngle = 20.0f;
 	public float baseSteerAngleAccel = 1.0f;
-	public float steerAngle = 0f;
+	private float steerAngle = 0f;
 
 	[Header("Tilting")]
 	public float tiltAmount = 0.3f;
@@ -38,6 +37,7 @@ public class PlayerShip : MonoBehaviour {
 
 	[Header("Particle Systems")]
 	public ParticleSystem crateDestroyParticleSystem;
+
 	
 	public void ConfigFromPreset(PlayerShipPreset preset) {
 		//moveSpeedModifier = preset.moveSpeedModifier;
@@ -75,7 +75,7 @@ public class PlayerShip : MonoBehaviour {
 			targetSteerAngle = baseSteerAngle;
 		}
 
-		steerAngle = Mathf.MoveTowards(steerAngle, targetSteerAngle, Time.deltaTime * baseSteerAngleAccel);
+		steerAngle = Mathf.MoveTowards(steerAngle, targetSteerAngle, baseSteerAngleAccel * Time.deltaTime);
 
 		float targetSteerAngleDelta = (targetSteerAngle - steerAngle) * tiltAmount;
 		tiltAngle = Mathf.MoveTowards(tiltAngle, targetSteerAngleDelta, tiltAccel * Time.deltaTime);
@@ -84,7 +84,7 @@ public class PlayerShip : MonoBehaviour {
 	public void Damage(int amount) {
 		crates = Mathf.Max(crates - amount, 0);
 
-		if (crates == 0) {
+		if (crates <= 0) {
 			OnPlayerDeath?.Invoke();
 			Destroy(gameObject);
 		}
