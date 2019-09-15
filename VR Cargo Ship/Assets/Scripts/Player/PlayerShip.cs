@@ -28,21 +28,11 @@ public class PlayerShip : MonoBehaviour {
 	public float mapEdge = 1f;
 
 	// Cargo
-	private int crates = 0;
-	public int Crates {
-		get {
-			return crates;
-		}
-	}
+	public int crates = 10;
 
 	[Header("Particle Systems")]
 	public ParticleSystem crateDestroyParticleSystem;
 
-	
-	public void ConfigFromPreset(PlayerShipPreset preset) {
-		//moveSpeedModifier = preset.moveSpeedModifier;
-		//steerSpeedModifier = preset.steerSpeedModifier;
-	}
 	
 	public void Update() {
 		Move();
@@ -90,8 +80,7 @@ public class PlayerShip : MonoBehaviour {
 		}
 	}
 
-	public void OnDrawGizmos()
-	{
+	public void OnDrawGizmos() {
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawRay(new Ray(transform.position, transform.rotation * Vector3.forward));
 	}

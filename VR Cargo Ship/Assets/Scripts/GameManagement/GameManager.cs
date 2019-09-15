@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void PlayerReachFinishLine() {
-		Score += Mathf.FloorToInt(playerShip.Crates * crateScoreModifier);
+		Score += Mathf.FloorToInt(playerShip.crates * crateScoreModifier);
 		Level += 1;
 		spawnHeuristic.CurrentLevel = Level;
 		
