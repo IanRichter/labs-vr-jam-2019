@@ -13,6 +13,7 @@ public class ConfirmMenu : MonoBehaviour {
 	}
 
 	private void ButtonClickHandler() {
+		Debug.Log("MenuConfirmed");
 		OnConfirm?.Invoke();
 	}
 

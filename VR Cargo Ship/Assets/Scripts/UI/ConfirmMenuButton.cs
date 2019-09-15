@@ -11,6 +11,7 @@ public class ConfirmMenuButton : MonoBehaviour {
 			return;
 		}
 
+		Debug.Log("Button clicked");
 		OnClick?.Invoke();
 	}
 
