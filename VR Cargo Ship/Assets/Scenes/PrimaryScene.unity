@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18084541, g: 0.22638306, b: 0.3072095, a: 1}
+  m_IndirectSpecularColor: {r: 0.18084483, g: 0.22638245, b: 0.3072087, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -822,6 +822,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2276560137230488989, guid: fe0a7649f91204643bffc8d908fe7576,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 258
+      objectReference: {fileID: 0}
     - target: {fileID: 2276560137950465431, guid: fe0a7649f91204643bffc8d908fe7576,
         type: 3}
       propertyPath: m_Mesh
@@ -831,6 +836,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276560138748045554, guid: fe0a7649f91204643bffc8d908fe7576,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4880346
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276560138748045554, guid: fe0a7649f91204643bffc8d908fe7576,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4880346
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276560138748045554, guid: fe0a7649f91204643bffc8d908fe7576,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4880346
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276560138748045554, guid: fe0a7649f91204643bffc8d908fe7576,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1442
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276560138748045554, guid: fe0a7649f91204643bffc8d908fe7576,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276560138151186215, guid: fe0a7649f91204643bffc8d908fe7576,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe0a7649f91204643bffc8d908fe7576, type: 3}
@@ -1088,6 +1123,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 7242899177123026040, guid: 41254927461e5914e8341acb31592e3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7242899177123026042, guid: 41254927461e5914e8341acb31592e3f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1142,6 +1182,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242899176992974902, guid: 41254927461e5914e8341acb31592e3f,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242899176257831872, guid: 41254927461e5914e8341acb31592e3f,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41254927461e5914e8341acb31592e3f, type: 3}

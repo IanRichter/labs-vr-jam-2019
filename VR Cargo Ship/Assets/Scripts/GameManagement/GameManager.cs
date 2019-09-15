@@ -217,6 +217,7 @@ public class GameManager : MonoBehaviour {
 		Debug.Log("ShowGameOverMenu");
 		activeGameState = GameState.GameOver;
 		ShowMenu(gameOverScreen);
+		gameOverScreen.SetScore(Score);
 	}
 
 	// ========================================================================
