@@ -61,7 +61,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
-    - _EndPerc: 0.9
+    - _EndPerc: 0.85
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -74,7 +74,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StartPerc: 0.1
+    - _StartPerc: 0.2
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
