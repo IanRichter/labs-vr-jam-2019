@@ -21,14 +21,14 @@ public class PlayerShip : MonoBehaviour {
 	[HideInInspector]
 	public InputManager inputManager;
 
+	public delegate void PlayerDamageEvent(int amount);
+	public PlayerDamageEvent OnPlayerDamaged;
+
 	public delegate void PlayerDeathEvent();
 	public PlayerDeathEvent OnPlayerDeath;
 
 	[HideInInspector]
 	public float mapEdge = 1f;
-
-	// Cargo
-	public int crates = 10;
 
 	[Header("Particle Systems")]
 	public ParticleSystem crateDestroyParticleSystem;
@@ -72,12 +72,7 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	public void Damage(int amount) {
-		crates = Mathf.Max(crates - amount, 0);
-
-		if (crates <= 0) {
-			OnPlayerDeath?.Invoke();
-			Destroy(gameObject);
-		}
+		OnPlayerDamaged?.Invoke(amount);
 	}
 
 	public void OnDrawGizmos() {
