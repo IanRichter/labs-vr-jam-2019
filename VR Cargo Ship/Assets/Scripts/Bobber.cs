@@ -11,6 +11,7 @@ public class Bobber : MonoBehaviour
 	public float tiltSpeed = 1.0f;
 
 	private float currentTime = 0.0f;
+	private Transform transform;
 	private Vector3 originalPosition;
 	private Quaternion originalRotation;
 
@@ -28,6 +29,7 @@ public class Bobber : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+		transform = GetComponent<Transform>();
 		originalPosition = transform.position;
 		originalRotation = transform.rotation;
 		currentHeightOffset = waterSimulator.GetHeightAtWorldPosition(originalPosition);
@@ -57,7 +59,6 @@ public class Bobber : MonoBehaviour
 		position.y = originalPosition.y + currentHeightOffset + bobOffset;
 		transform.position = position;
 	}
-
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.green;
