@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMoveSpeed: 0.2
-  baseBoostMoveSpeed: 1
-  baseMoveSpeedAccel: 0.2
+  baseBoostMoveSpeed: 0.5
+  baseMoveSpeedAccel: 0.5
   baseSteerAngle: 20
-  baseSteerAngleAccel: 15
+  baseSteerAngleAccel: 30
   steerAngle: 0
   tiltAmount: 0.7
   tiltAccel: 5

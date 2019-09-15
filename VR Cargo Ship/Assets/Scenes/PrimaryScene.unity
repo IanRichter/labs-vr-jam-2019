@@ -7570,7 +7570,12 @@ PrefabInstance:
     - target: {fileID: 8166548086194135464, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
         type: 3}
       propertyPath: currentLevel
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8166548086194135464, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
+        type: 3}
+      propertyPath: difficultyRamp
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8166548086194135466, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
         type: 3}
