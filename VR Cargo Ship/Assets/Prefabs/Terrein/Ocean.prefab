@@ -214,11 +214,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numLanes: 10
+  laneOffset: 1
   startPoint: {fileID: 1561446350267179033}
   endPoint: {fileID: 1563440768167398943}
   laneContainer: {fileID: 841797319}
   lanePrefab: {fileID: 6138128929366809707, guid: 282407a092229a242b6f9ab3a9f1d4aa,
     type: 3}
+  waterSimulator: {fileID: 0}
 --- !u!1 &7822937475207615655
 GameObject:
   m_ObjectHideFlags: 0

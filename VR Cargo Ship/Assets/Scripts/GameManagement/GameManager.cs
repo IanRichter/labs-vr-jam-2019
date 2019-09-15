@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour {
 
 	[Header("Menus")]
 	public ConfirmMenu startScreen;
-	public ConfirmMenu gameOverScreen;
+	public ConfirmMenu respawnScreen;
+	public GameOverScreen gameOverScreen;
 
 	[Header("Gameplay UI")]
 	public ScoreUI scoreDisplay;
-	public HealthUI healthDisplay;
 	public LevelUI levelDisplay;
+	public HealthUI healthDisplay;
+	// public GameObject crateDisplay;
 
 	[Header("Components")]
 	public SpawnHeuristic spawnHeuristic;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour {
 		Start,
 		Tutorial,
 		GamePlay,
+		Respawn,
 		GameOver
 	}
 
@@ -46,7 +49,7 @@ public class GameManager : MonoBehaviour {
 		}
 		set {
 			score = value;
-			//scoreDisplay.SetScore(score);
+			scoreDisplay.SetScore(score);
 		}
 	}
 
@@ -56,7 +59,7 @@ public class GameManager : MonoBehaviour {
 		}
 		set {
 			health = value;
-			//healthDisplay.SetHealth(health);
+			healthDisplay.SetHealth(health);
 		}
 	}
 
@@ -66,7 +69,7 @@ public class GameManager : MonoBehaviour {
 		}
 		set {
 			level = value;
-			//levelDisplay.SetLevel(level);
+			levelDisplay.SetLevel(level);
 		}
 	}
 
@@ -78,61 +81,132 @@ public class GameManager : MonoBehaviour {
 
 
 	private void Start() {
+		// Menu Handlers
+		startScreen.OnConfirm += StartMenuConfirmHandler;
+		respawnScreen.OnConfirm += RespawnMenuConfirmHandler;
+		gameOverScreen.OnConfirm += GameOverMenuConfirmHandler;
 
-		//startScreen.OnConfirm += StartScreenConfirmHandler;
-		//gameOverScreen.OnConfirm += GameOverScreenConfirmHandler;
-
+		// Start
 		ResetGameState();
-		StartGame();
+		ShowStartMenu();
 	}
 
 	private void Update() {
 		switch (activeGameState) {
+
 			case GameState.Start:
-				// Stub
+				if (Input.GetKeyDown(KeyCode.L)) {
+					ShowTutorialMenu();
+				}
 				break;
 
 			case GameState.Tutorial:
-				activeGameState = GameState.GamePlay;
+				if (Input.GetKeyDown(KeyCode.L)) {
+					StartGame();
+				}
 				break;
 
 			case GameState.GamePlay:
-				if (!playerShip) {
-					SpawnShip();
-				}
-
 				if (IsShipOverFinish) {
 					PlayerReachFinishLine();
 				}
 				break;
 
+			case GameState.Respawn:
+				if (Input.GetKeyDown(KeyCode.L)) {
+					StartGame();
+				}
+				break;
+
 			case GameState.GameOver:
-				// Stub
+				if (Input.GetKeyDown(KeyCode.L)) {
+					ShowStartMenu();
+				}
 				break;
 
 			default:
-				Debug.Log("Invalid game state");
 				return;
 		}
 	}
 
-	private void StartScreenConfirmHandler() {
+	// ========================================================================
+
+	private void StartMenuConfirmHandler() {
+		if (activeGameState != GameState.Start) {
+			return;
+		}
+
+		ShowTutorialMenu();
+	}
+
+	private void TutorialMenuConfirmHandler() {
+		if (activeGameState != GameState.Tutorial) {
+			return;
+		}
+
 		StartGame();
 	}
 
-	private void GameOverScreenConfirmHandler() {
+	private void RespawnMenuConfirmHandler() {
+		if (activeGameState != GameState.Respawn) {
+			return;
+		}
+
 		StartGame();
+	}
+
+	private void GameOverMenuConfirmHandler() {
+		if (activeGameState != GameState.GameOver) {
+			return;
+		}
+
+		ShowStartMenu();
+	}
+
+	// ========================================================================
+
+	private void ShowMenu(ConfirmMenu menu) {
+		startScreen.gameObject.SetActive(menu == startScreen);
+		respawnScreen.gameObject.SetActive(menu == respawnScreen);
+		gameOverScreen.gameObject.SetActive(menu == gameOverScreen);
+	}
+
+	// ========================================================================
+
+	private void ShowStartMenu() {
+		Debug.Log("ShowStartMenu");
+		activeGameState = GameState.Start;
+		ShowMenu(startScreen);
+	}
+
+	// TODO: Implement this
+	private void ShowTutorialMenu() {
+		Debug.Log("ShowTutorialMenu");
+		activeGameState = GameState.Tutorial;
+
+		StartGame(); // Temp
 	}
 
 	private void StartGame() {
-		ResetGameState();
-
+		Debug.Log("StartGame");
 		activeGameState = GameState.GamePlay;
+		ShowMenu(null);
+		SpawnShip();
 	}
 
-	private void GameOver() {
-		activeGameState = GameState.GameOver;
+	private void ShowRespawnMenu() {
+		Debug.Log("ShowRespawnMenu");
+		activeGameState = GameState.Respawn;
+		ShowMenu(respawnScreen);
 	}
+
+	private void ShowGameOverMenu() {
+		Debug.Log("ShowGameOverMenu");
+		activeGameState = GameState.GameOver;
+		ShowMenu(gameOverScreen);
+	}
+
+	// ========================================================================
 
 	private bool IsShipOverFinish {
 		get {
@@ -157,6 +231,7 @@ public class GameManager : MonoBehaviour {
 		spawnHeuristic.CurrentLevel = Level;
 		
 		Destroy(playerShip.gameObject);
+		ShowRespawnMenu();
 	}
 
 	private void PlayerDeathHandler() {
@@ -164,7 +239,10 @@ public class GameManager : MonoBehaviour {
 
 		Health--;
 		if (Health <= 0) {
-			GameOver();
+			ShowGameOverMenu();
+		}
+		else {
+			ShowRespawnMenu();
 		}
 	}
 
