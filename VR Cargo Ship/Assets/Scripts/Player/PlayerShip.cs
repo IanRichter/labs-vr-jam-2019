@@ -6,14 +6,18 @@ public class PlayerShip : MonoBehaviour {
 	public float baseMoveSpeed = 0f;
 	public float baseBoostMoveSpeed = 0f;
 	public float baseMoveSpeedAccel = 0.075f;
-	private float moveSpeedModifier = 1f;
+	//private float moveSpeedModifier = 1f;
 	private float moveSpeed = 0;
 
 	[Header("Steering Movement")]
-	public float baseSteerSpeed = 0f;
-	public float baseSteerSpeedAccel = 0.05f;
-	public float steerSpeed = 0f;
-	private float steerSpeedModifier = 1f;
+	public float baseSteerAngle = 20.0f;
+	public float baseSteerAngleAccel = 1.0f;
+	public float steerAngle = 0f;
+
+	[Header("Tilting")]
+	public float tiltAmount = 0.3f;
+	public float tiltAccel = 1.0f;
+	private float tiltAngle = 0f;
 
 	[HideInInspector]
 	public InputManager inputManager;
@@ -31,40 +35,43 @@ public class PlayerShip : MonoBehaviour {
 
 	[Header("Particle Systems")]
 	public ParticleSystem crateDestroyParticleSystem;
-
-
+	
 	public void ConfigFromPreset(PlayerShipPreset preset) {
-		moveSpeedModifier = preset.moveSpeedModifier;
-		steerSpeedModifier = preset.steerSpeedModifier;
+		//moveSpeedModifier = preset.moveSpeedModifier;
+		//steerSpeedModifier = preset.steerSpeedModifier;
 	}
-
+	
 	public void Update() {
 		Move();
 		Steer();
+
+		Quaternion forward = Quaternion.AngleAxis(steerAngle, Vector3.up);
+		transform.rotation = forward * Quaternion.AngleAxis(tiltAngle * tiltAmount, forward * Vector3.forward);
+		Vector3 forwardVector = (transform.rotation * Vector3.forward);
+		forwardVector.y = 0.0f;
+		transform.position += forwardVector * moveSpeed * Time.deltaTime;
 	}
 
 	private void Move() {
 		float targetMoveSpeed = inputManager.IsBoosting ? baseBoostMoveSpeed : baseMoveSpeed;
-		moveSpeed = Mathf.MoveTowards(moveSpeed, targetMoveSpeed, baseMoveSpeedAccel);
-	
-		transform.position += transform.forward * moveSpeed * Time.deltaTime;
+		moveSpeed = Mathf.MoveTowards(moveSpeed, targetMoveSpeed, Time.deltaTime * baseMoveSpeedAccel);
 	}
 
 	private void Steer() {
-		float targetSteerSpeed = 0f;
-
-		if (inputManager.IsLeft) {
-			targetSteerSpeed = -baseSteerSpeed;
+		float targetSteerAngle = 0f;
+		if (inputManager.IsLeft)
+		{
+			targetSteerAngle = -baseSteerAngle;
 		}
-		if (inputManager.IsRight) {
-			targetSteerSpeed = baseSteerSpeed;
+		if (inputManager.IsRight)
+		{
+			targetSteerAngle = baseSteerAngle;
 		}
 
-		steerSpeed = Mathf.MoveTowards(steerSpeed, targetSteerSpeed, baseSteerSpeedAccel);
+		steerAngle = Mathf.MoveTowards(steerAngle, targetSteerAngle, Time.deltaTime * baseSteerAngleAccel);
 
-		Vector3 pos = transform.position;
-		pos.x += steerSpeed * Time.deltaTime;
-		transform.position = pos;
+		float targetSteerAngleDelta = (targetSteerAngle - steerAngle) * tiltAmount;
+		tiltAngle = Mathf.MoveTowards(tiltAngle, targetSteerAngleDelta, tiltAccel * Time.deltaTime);
 	}
 
 	public void Damage(int amount) {
@@ -76,4 +83,9 @@ public class PlayerShip : MonoBehaviour {
 		}
 	}
 
+	public void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawRay(new Ray(transform.position, transform.rotation * Vector3.forward));
+	}
 }

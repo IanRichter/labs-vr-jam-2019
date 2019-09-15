@@ -12,6 +12,8 @@ public class LaneManager : MonoBehaviour {
 
 	private SpawnLane[] lanes;
 
+	public WaterSimulator waterSimulator;
+
 	private void Start() {
 		lanes = new SpawnLane[numLanes];
 		GenerateLanes(startPoint.position, endPoint.position);
@@ -23,7 +25,7 @@ public class LaneManager : MonoBehaviour {
 			Vector3 position = Vector3.Lerp(startPoint, endPoint, i / (float)(numLanes - 1));
 			//SpawnLane lane = Instantiate(lanePrefab, position, Quaternion.identity).GetComponent<SpawnLane>();
 			SpawnLane lane = Instantiate(lanePrefab, position, Quaternion.identity).GetComponent<SpawnLane>();
-			lane.ConfigSpawnPoints(laneOffset);
+			lane.ConfigSpawnPoints(waterSimulator, laneOffset);
 			lanes[i] = lane;
 		}
 	}

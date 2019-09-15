@@ -153,6 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bobAmount: 0.01
   bobSpeed: 2
+  heightAdjustSpeed: 2
+  tiltFactor: 3
+  tiltSpeed: 0.3
 --- !u!54 &5827415204398038166
 Rigidbody:
   m_ObjectHideFlags: 0

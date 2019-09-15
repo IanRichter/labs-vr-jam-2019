@@ -79,7 +79,7 @@ MonoBehaviour:
   bobSpeed: 3
   heightAdjustSpeed: 2
   tiltFactor: 7
-  tiltSpeed: 2
+  tiltSpeed: 0.4
 --- !u!54 &1033150886063923114
 Rigidbody:
   m_ObjectHideFlags: 0

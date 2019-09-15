@@ -117,7 +117,7 @@ public class WaterSimulator : MonoBehaviour
 		float h10 = heights[(ix + 1) + iy * (size.x + 1)];
 		float h01 = heights[ix + (iy + 1) * (size.x + 1)];
 		
-		return Vector3.Normalize(new Vector3(h10 - h00, squareSize, h01 - h00));
+		return Vector3.Normalize(new Vector3(h00 - h10, squareSize, h00 - h01));
 	}
 
 	void UpdateVertices()
