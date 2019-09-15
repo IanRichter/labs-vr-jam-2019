@@ -10,9 +10,17 @@ public class Obstacle : MonoBehaviour {
 
 	private bool hasHitPlayer = false;
 
+	[HideInInspector]
+	public GameObject entityDeadPrefab;
 
 	public void DestroyObject() {
 		OnDestroyed?.Invoke(this);
+		Destroy(gameObject);
+	}
+
+	private void Die()
+	{
+		GameObject deadObject = Instantiate(entityDeadPrefab, transform.position, transform.rotation);
 		Destroy(gameObject);
 	}
 
@@ -27,7 +35,7 @@ public class Obstacle : MonoBehaviour {
 			hasHitPlayer = true;
 
 			if (isDestroyable) {
-				DestroyObject();
+				Die();
 			}
 		}
 	}

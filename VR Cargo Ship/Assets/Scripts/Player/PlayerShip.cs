@@ -18,8 +18,13 @@ public class PlayerShip : MonoBehaviour {
 	public float tiltAccel = 1.0f;
 	private float tiltAngle = 0f;
 
+	public GameObject entityDeadPrefab;
+
 	[HideInInspector]
 	public InputManager inputManager;
+
+	public delegate void PlayerDamageEvent(int amount);
+	public PlayerDamageEvent OnPlayerDamaged;
 
 	public delegate void PlayerDeathEvent();
 	public PlayerDeathEvent OnPlayerDeath;
@@ -27,22 +32,8 @@ public class PlayerShip : MonoBehaviour {
 	[HideInInspector]
 	public float mapEdge = 1f;
 
-	// Cargo
-	private int crates = 0;
-	public int Crates {
-		get {
-			return crates;
-		}
-	}
-
 	[Header("Particle Systems")]
 	public ParticleSystem crateDestroyParticleSystem;
-
-	
-	public void ConfigFromPreset(PlayerShipPreset preset) {
-		//moveSpeedModifier = preset.moveSpeedModifier;
-		//steerSpeedModifier = preset.steerSpeedModifier;
-	}
 	
 	public void Update() {
 		Move();
@@ -82,16 +73,15 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	public void Damage(int amount) {
-		crates = Mathf.Max(crates - amount, 0);
-
-		if (crates <= 0) {
-			OnPlayerDeath?.Invoke();
-			Destroy(gameObject);
-		}
+		OnPlayerDamaged?.Invoke(amount);
 	}
 
-	public void OnDrawGizmos()
+	public void OnDestroy()
 	{
+		GameObject deadObject = Instantiate(entityDeadPrefab, transform.position, transform.rotation);
+	}
+
+	public void OnDrawGizmos() {
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawRay(new Ray(transform.position, transform.rotation * Vector3.forward));
 	}

@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour {
 
 	[Header("GameState Config")]
 	public int maxHealth = 3;
+	public int maxCrates = 10;
 	public float crateScoreModifier = 10f;
 
 	[Header("Player Management")]
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
 	[Header("Menus")]
 	public ConfirmMenu startScreen;
+	public ConfirmMenu tutorialScreen;
 	public ConfirmMenu respawnScreen;
 	public GameOverScreen gameOverScreen;
 
@@ -21,7 +23,7 @@ public class GameManager : MonoBehaviour {
 	public ScoreUI scoreDisplay;
 	public LevelUI levelDisplay;
 	public HealthUI healthDisplay;
-	// public GameObject crateDisplay;
+	public CargoUI crateDisplay;
 
 	[Header("Components")]
 	public SpawnHeuristic spawnHeuristic;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour {
 
 	// Game state
 	private int health = 0;
+	private int crates = 0;
 	private int score = 0;
 	private int level = 1;
 	private PlayerShip playerShip;
@@ -73,8 +76,19 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	private int Crates {
+		get {
+			return crates;
+		}
+		set {
+			crates = value;
+			crateDisplay.SetCargo(crates);
+		}
+	}
+
 	private void ResetGameState() {
 		Health = maxHealth;
+		//Crates = maxCrates;
 		Score = 0;
 		Level = 1;
 	}
@@ -166,6 +180,7 @@ public class GameManager : MonoBehaviour {
 
 	private void ShowMenu(ConfirmMenu menu) {
 		startScreen.gameObject.SetActive(menu == startScreen);
+		tutorialScreen.gameObject.SetActive(menu == tutorialScreen);
 		respawnScreen.gameObject.SetActive(menu == respawnScreen);
 		gameOverScreen.gameObject.SetActive(menu == gameOverScreen);
 	}
@@ -179,12 +194,10 @@ public class GameManager : MonoBehaviour {
 		ShowMenu(startScreen);
 	}
 
-	// TODO: Implement this
 	private void ShowTutorialMenu() {
 		Debug.Log("ShowTutorialMenu");
 		activeGameState = GameState.Tutorial;
-
-		StartGame(); // Temp
+		ShowMenu(tutorialScreen);
 	}
 
 	private void StartGame() {
@@ -204,6 +217,7 @@ public class GameManager : MonoBehaviour {
 		Debug.Log("ShowGameOverMenu");
 		activeGameState = GameState.GameOver;
 		ShowMenu(gameOverScreen);
+		gameOverScreen.SetScore(Score);
 	}
 
 	// ========================================================================
@@ -220,13 +234,16 @@ public class GameManager : MonoBehaviour {
 
 	private void SpawnShip() {
 		playerShip = Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent<PlayerShip>();
+		
 		playerShip.inputManager = inputManager;
 		playerShip.mapEdge = playerMapEdge;
-		playerShip.OnPlayerDeath += PlayerDeathHandler;
+
+		playerShip.OnPlayerDamaged += PlayerDamageHandler;
 	}
 
 	private void PlayerReachFinishLine() {
-		Score += Mathf.FloorToInt(playerShip.Crates * crateScoreModifier);
+		//Score += (int)(Crates * crateScoreModifier);
+		Score += (int)(crateScoreModifier * (float)Level);
 		Level += 1;
 		spawnHeuristic.CurrentLevel = Level;
 		
@@ -234,8 +251,14 @@ public class GameManager : MonoBehaviour {
 		ShowRespawnMenu();
 	}
 
-	private void PlayerDeathHandler() {
-		playerShip.OnPlayerDeath -= PlayerDeathHandler;
+	private void PlayerDamageHandler(int amount) {
+		Debug.Log("Player Damaged");
+		KillPlayer();
+	}
+
+	private void KillPlayer() {
+		playerShip.OnPlayerDamaged += PlayerDamageHandler;
+		Destroy(playerShip.gameObject);
 
 		Health -= 1;
 		if (Health <= 0) {
