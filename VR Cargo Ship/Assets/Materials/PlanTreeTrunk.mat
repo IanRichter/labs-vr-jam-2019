@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OceanWater
-  m_Shader: {fileID: 4800000, guid: 784e9541869e379428d388901c128bd1, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
+  m_Name: PlanTreeTrunk
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -57,29 +57,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _CheckerSize: 0.02
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DstBlend: 10
-    - _EndPerc: 0.85
+    - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LaneCount: 10
     - _Metallic: 0
-    - _Mode: 3
+    - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Shininess: 20
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StartPerc: 0.2
     - _UVSec: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.45882356, g: 0.79215693, b: 0.7843138, a: 0.78431374}
-    - _Color: {r: 0.18369517, g: 0.7946418, b: 0.9056604, a: 0.56078434}
+    - _Color: {r: 0.3962264, g: 0.17473656, b: 0.024296913, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LaneColorA: {r: 0.41568625, g: 0.9009803, b: 0.94509804, a: 0.6862745}
-    - _LaneColorB: {r: 0.3806522, g: 0.80934787, b: 0.85, a: 0.78431374}

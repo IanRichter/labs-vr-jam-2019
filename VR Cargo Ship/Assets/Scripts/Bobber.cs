@@ -19,7 +19,7 @@ public class Bobber : MonoBehaviour
 	private Vector3 currentUpNormal;
 	private Vector3 targetUpNormal;
 	
-	private WaterSimulator waterSimulator;
+	public WaterSimulator waterSimulator;
 
 	public void Config(WaterSimulator waterSimulator)
 	{
