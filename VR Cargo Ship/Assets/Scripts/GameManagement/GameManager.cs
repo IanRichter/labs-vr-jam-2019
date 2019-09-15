@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
 	[Header("Menus")]
 	public ConfirmMenu startScreen;
+	public ConfirmMenu tutorialScreen;
 	public ConfirmMenu respawnScreen;
 	public GameOverScreen gameOverScreen;
 
@@ -179,6 +180,7 @@ public class GameManager : MonoBehaviour {
 
 	private void ShowMenu(ConfirmMenu menu) {
 		startScreen.gameObject.SetActive(menu == startScreen);
+		tutorialScreen.gameObject.SetActive(menu == tutorialScreen);
 		respawnScreen.gameObject.SetActive(menu == respawnScreen);
 		gameOverScreen.gameObject.SetActive(menu == gameOverScreen);
 	}
@@ -192,12 +194,10 @@ public class GameManager : MonoBehaviour {
 		ShowMenu(startScreen);
 	}
 
-	// TODO: Implement this
 	private void ShowTutorialMenu() {
 		Debug.Log("ShowTutorialMenu");
 		activeGameState = GameState.Tutorial;
-
-		StartGame(); // Temp
+		ShowMenu(tutorialScreen);
 	}
 
 	private void StartGame() {
@@ -258,7 +258,7 @@ public class GameManager : MonoBehaviour {
 
 	private void KillPlayer() {
 		playerShip.OnPlayerDamaged += PlayerDamageHandler;
-		Destroy(playerShip);
+		Destroy(playerShip.gameObject);
 
 		Health -= 1;
 		if (Health <= 0) {
