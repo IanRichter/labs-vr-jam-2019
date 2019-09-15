@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityPrefab: {fileID: 3052086594856496823, guid: fdb57771413cd2d48bb24d0786b13c86,
     type: 3}
-  difficulty: 0.2
+  difficulty: 0.3

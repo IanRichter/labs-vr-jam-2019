@@ -10,7 +10,7 @@ public class SpawnHeuristic : MonoBehaviour {
 	[SerializeField]
 	private int currentLevel;
 
-	private float difficulty;
+	public float difficulty;
 	private float tweakValue = 3.0f;
 	private double tickTimer = 0.0;
 	private double updateInterval = 1.0f;
@@ -18,36 +18,48 @@ public class SpawnHeuristic : MonoBehaviour {
 
 	public void Start()
 	{
-		probability = new float[entityConfigs.Length];
+		probability = new float[entityConfigs.Length + 1];
 	}
 	
 	public int CurrentLevel {
 		set {
 			currentLevel = value;
 
-			difficulty = 1.0f - (tweakValue / tweakValue - currentLevel);
+			difficulty = 1.0f - (3f / (3f + currentLevel));
 		}
 	}
 
 	private void getProbabilities() {
 
-		int length = entityConfigs.Length;
+		int length = entityConfigs.Length + 1;
 		float totalProb = 0f;
+		int entityTypeCount = 0;
+		int totalCount = 0;
 
 		for (int i=0; i < length; i++)
 		{
-			probability[i] = (1 - Mathf.Abs(difficulty - entityConfigs[i].difficulty));
+			if (i == 0)
+			{
+				probability[i] = 1 - difficulty;
+			}
+			else
+			{
+				probability[i] = (1 - Mathf.Abs(difficulty - entityConfigs[i - 1].difficulty));
+				entityTypeCount = laneManager.NumberOfEntityType(entityConfigs[i -1 ]);
+				totalCount = laneManager.TotalEmptyLanes;
+			}
+
+			
+			//probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount)) * (5f / (5f + (laneManager.numLanes - totalCount)));
+			probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount));
+
 			totalProb += probability[i];
 		}
 
 		for(int i=0; i < length; i++)
 		{
+			
 			probability[i] /= totalProb;
-
-			int entityTypeCount = laneManager.NumberOfEntityType(entityConfigs[i]);
-			int totalCount = laneManager.TotalEmptyLanes;
-			//probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount)) * (tweakValue / (tweakValue + (laneManager.numLanes - totalCount))) ;
-			probability[i] = probability[i] * (tweakValue / (tweakValue + entityTypeCount));
 		}
 	}
 
@@ -61,9 +73,9 @@ public class SpawnHeuristic : MonoBehaviour {
 		for(int i=0; i < probability.Length; i++)
 		{
 			currentProb += probability[i];
-			if (randNum < currentProb)
+			if (randNum <= currentProb)
 			{
-				entityNum = i;
+				entityNum = i - 1;
 				return entityNum;
 			}
 		}

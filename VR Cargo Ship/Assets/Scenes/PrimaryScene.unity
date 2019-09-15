@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18084541, g: 0.22638306, b: 0.3072095, a: 1}
+  m_IndirectSpecularColor: {r: 0.18084483, g: 0.22638245, b: 0.3072087, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2673,16 +2673,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: InputManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7231542093142349874, guid: 787160d79faf3574c8361ab127714c06,
-        type: 3}
-      propertyPath: leftHand
-      value: 
-      objectReference: {fileID: 1481215084}
-    - target: {fileID: 7231542093142349874, guid: 787160d79faf3574c8361ab127714c06,
-        type: 3}
-      propertyPath: rightHand
-      value: 
-      objectReference: {fileID: 455781821}
     - target: {fileID: 6560547455577543086, guid: 787160d79faf3574c8361ab127714c06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2738,6 +2728,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7231542093142349874, guid: 787160d79faf3574c8361ab127714c06,
+        type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 1481215084}
+    - target: {fileID: 7231542093142349874, guid: 787160d79faf3574c8361ab127714c06,
+        type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 455781821}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 787160d79faf3574c8361ab127714c06, type: 3}
 --- !u!1001 &5002573211302900721
@@ -2862,15 +2862,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ocean
       objectReference: {fileID: 0}
-    - target: {fileID: 506258561, guid: 31f6626d4c1dda04e8cc1430d3faf8a2, type: 3}
-      propertyPath: waterSimulator
-      value: 
-      objectReference: {fileID: 1132240437}
-    - target: {fileID: 7822937475207615650, guid: 31f6626d4c1dda04e8cc1430d3faf8a2,
-        type: 3}
-      propertyPath: wave2Height
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 7822937476187564957, guid: 31f6626d4c1dda04e8cc1430d3faf8a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2931,6 +2922,15 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7822937475207615650, guid: 31f6626d4c1dda04e8cc1430d3faf8a2,
+        type: 3}
+      propertyPath: wave2Height
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 506258561, guid: 31f6626d4c1dda04e8cc1430d3faf8a2, type: 3}
+      propertyPath: waterSimulator
+      value: 
+      objectReference: {fileID: 1132240437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f6626d4c1dda04e8cc1430d3faf8a2, type: 3}
 --- !u!1001 &8166548084923818725
@@ -2944,16 +2944,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpawnHeuristic
-      objectReference: {fileID: 0}
-    - target: {fileID: 8166548086194135464, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
-        type: 3}
-      propertyPath: laneManager
-      value: 
-      objectReference: {fileID: 506258561}
-    - target: {fileID: 8166548086194135464, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
-        type: 3}
-      propertyPath: currentLevel
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8166548086194135466, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
         type: 3}
@@ -3009,6 +2999,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8166548086194135464, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
+        type: 3}
+      propertyPath: laneManager
+      value: 
+      objectReference: {fileID: 506258561}
+    - target: {fileID: 8166548086194135464, guid: 1ac5f9dc60240d24c8ba629a1a6d4672,
+        type: 3}
+      propertyPath: currentLevel
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ac5f9dc60240d24c8ba629a1a6d4672, type: 3}
