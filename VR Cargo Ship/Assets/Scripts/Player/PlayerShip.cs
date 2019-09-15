@@ -25,6 +25,9 @@ public class PlayerShip : MonoBehaviour {
 	public delegate void PlayerDeathEvent();
 	public PlayerDeathEvent OnPlayerDeath;
 
+	[HideInInspector]
+	public float mapEdge = 1f;
+
 	// Cargo
 	private int crates = 0;
 	public int Crates {
@@ -49,7 +52,11 @@ public class PlayerShip : MonoBehaviour {
 		transform.rotation = forward * Quaternion.AngleAxis(tiltAngle * tiltAmount, forward * Vector3.forward);
 		Vector3 forwardVector = (transform.rotation * Vector3.forward);
 		forwardVector.y = 0.0f;
-		transform.position += forwardVector * moveSpeed * Time.deltaTime;
+
+		Vector3 position = transform.position;
+		position += forwardVector * moveSpeed * Time.deltaTime;
+		position.x = Mathf.Clamp(position.x, -mapEdge, mapEdge);
+		transform.position = position;
 	}
 
 	private void Move() {

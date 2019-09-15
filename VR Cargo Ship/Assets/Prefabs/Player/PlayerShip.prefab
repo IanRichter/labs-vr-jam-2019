@@ -49,11 +49,12 @@ MonoBehaviour:
   baseBoostMoveSpeed: 1
   baseMoveSpeedAccel: 0.2
   baseSteerAngle: 20
-  baseSteerAngleAccel: 10
+  baseSteerAngleAccel: 15
   steerAngle: 0
   tiltAmount: 0.7
   tiltAccel: 5
   inputManager: {fileID: 0}
+  mapEdge: 1
   crateDestroyParticleSystem: {fileID: 0}
 --- !u!65 &7997061040786774789
 BoxCollider:

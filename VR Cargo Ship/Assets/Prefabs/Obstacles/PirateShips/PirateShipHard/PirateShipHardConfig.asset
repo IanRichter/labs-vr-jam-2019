@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42931c96213a27c429906b04d3c91d49, type: 3}
   m_Name: PirateShipHardConfig
   m_EditorClassIdentifier: 
-  entityPrefab: {fileID: 0}
+  entityPrefab: {fileID: 2809638777305119967, guid: 4418dbcf9cc2a0b44a48575ec67002fd,
+    type: 3}
   difficulty: 1
