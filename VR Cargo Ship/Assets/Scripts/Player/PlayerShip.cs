@@ -84,7 +84,7 @@ public class PlayerShip : MonoBehaviour {
 	public void Damage(int amount) {
 		crates = Mathf.Max(crates - amount, 0);
 
-		if (crates == 0) {
+		if (crates <= 0) {
 			OnPlayerDeath?.Invoke();
 			Destroy(gameObject);
 		}
