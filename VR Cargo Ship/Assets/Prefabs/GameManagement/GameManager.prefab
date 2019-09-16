@@ -44,13 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  maxCrates: 10
   crateScoreModifier: 10
   playerShipPrefab: {fileID: 3737195249553131517, guid: e85ca31472afb994f95083709a53609e,
     type: 3}
-  finishLineOffset: 3.84
+  finishLineOffset: 4
   playerSpawnPoint: {fileID: 0}
   playerMapEdge: 0.7
   startScreen: {fileID: 0}
+  tutorialScreen: {fileID: 0}
   respawnScreen: {fileID: 0}
   gameOverScreen: {fileID: 0}
   scoreDisplay: {fileID: 0}

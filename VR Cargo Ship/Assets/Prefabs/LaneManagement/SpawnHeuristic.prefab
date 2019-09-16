@@ -50,3 +50,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1fa47824451cdb14ab303af93cda6a0a, type: 2}
   - {fileID: 11400000, guid: 679a8ccba447d8e45bcdfdd5c9a2165b, type: 2}
   - {fileID: 11400000, guid: d92a57a724d302d4d922d6b13b25a1da, type: 2}
+  currentLevel: 0
+  difficultyRamp: 10
+  probabilityRangeFactor: 2
+  difficulty: 0
